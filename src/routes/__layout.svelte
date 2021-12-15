@@ -44,8 +44,9 @@
 	<span class="text-3xl font-bold tracking-widest">NITAD Poll</span>
 </header>
 
+<Nav {currentPath} {paths} />
+
 <main class="mx-14 md:mx-32 lg:mx-80">
-	<Nav {currentPath} {paths} />
 	<slot />
 </main>
 
