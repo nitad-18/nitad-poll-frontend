@@ -6,11 +6,6 @@
     return {
       props: {
         currentPath: page.path,
-        paths: [
-          { name: 'Current Polls', path: '/' },
-          { name: 'Create Poll', path: '/create' },
-          { name: 'Closed Polls', path: '/closed' },
-        ],
       },
     }
   }
@@ -21,7 +16,12 @@
   import '../app.css'
 
   export let currentPath: string
-  export let paths: { name: string; path: string }[]
+
+  const paths = [
+    { name: 'Current Polls', path: '/' },
+    { name: 'Create Poll', path: '/create' },
+    { name: 'Closed Polls', path: '/closed' },
+  ]
 </script>
 
 <header
