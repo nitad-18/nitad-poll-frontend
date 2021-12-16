@@ -1,14 +1,11 @@
 <script>
   import PollStore from '../stores/PollStore'
-  import { createEventDispatcher } from 'svelte'
 
-
-  let dispatch = createEventDispatcher()
   let fields = {
     question: '',
     options: [
-      ['Python', 0],
-      ['JavaScript', 0],
+      ['', 0],
+      ['', 0],
     ],
   }
 
@@ -26,7 +23,7 @@
         console.log(currentPolls)
         return [poll, ...currentPolls]
       })
-      dispatch('add')
+
     }
   }
 
@@ -35,8 +32,8 @@
   }
 </script>
 
-<div class="p-3 shadow-md bg-slate-600">
-  <form on:submit|preventDefault={submitHandler}>
+<div>
+  <form on:submit|preventDefault={submitHandler} class="p-5 shadow-md bg-slate-600">
     <h1>Question:</h1>
     <div class="form-field">
       <input
@@ -61,14 +58,14 @@
       </div>
     {/each}
 
-    <button type="button" class="text-gray-200 mb-3 underline" on:click={addOption}
+    <button type="button" class="text-gray-200 mb-3 underline align-middle" on:click={addOption}
       >Add Option</button
     >
     <br />
     <button
       type="submit"
       class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg 
-    font-medium capitalize"
+    font-medium capitalize align-middle"
       value="Add Poll">Submit</button
     >
   </form>
