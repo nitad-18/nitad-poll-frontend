@@ -10,7 +10,7 @@
   const optionColors = ['bg-blue-300', 'bg-green-300', 'bg-red-300']
 
   $: [option, votes] = pollOption
-  $: bgWidth = (votes / totalVotes) * 100 + '%'
+  $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1) + '%'
   $: bgColor = optionColors[index % 3]
 
   const handleVote = () => {
