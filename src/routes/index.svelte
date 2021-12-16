@@ -3,6 +3,8 @@
   import type { SortMode } from '$lib/types'
   import PollStore from '../../src/stores/PollStore'
 
+  let sortMode: SortMode = 'latest'
+
   const sortModes: SortMode[] = ['latest', 'popularity']
   const pollHandlers = {
     delete: (e: CustomEvent<{ pollId: string }>) =>
@@ -10,10 +12,8 @@
     close: (e: CustomEvent<{ pollId: string }>) =>
       PollStore.close(e.detail.pollId),
     vote: (e: CustomEvent<{ pollId: string; option: string }>) =>
-      PollStore.vote(e.detail.pollId, e.detail.option),
+      PollStore.vote(e.detail.pollId, e.detail.option, sortMode),
   }
-
-  let sortMode: SortMode = 'latest'
 
   $: PollStore.sort(sortMode)
 </script>

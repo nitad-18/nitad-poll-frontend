@@ -82,13 +82,16 @@ const createPollStore = () => {
     })
   }
 
-  const vote = (pollId: string, option: string) => {
+  const vote = (pollId: string, option: string, sortMode: SortMode) => {
     update((currentPolls) => {
       const poll = currentPolls.find((poll) => poll.id === pollId)
       poll.options.find((opt) => opt[0] === option)[1]++
       poll.votes++
       return currentPolls
     })
+    if (sortMode === 'popularity') {
+      sort(sortMode)
+    }
   }
 
   return {
