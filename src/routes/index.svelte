@@ -34,13 +34,20 @@
   {/each}
 </header>
 
-{#each $PollStore as poll (poll.id)}
-  {#if poll.open}
-    <PollCard
-      on:vote={pollHandlers.vote}
-      on:close={pollHandlers.close}
-      on:delete={pollHandlers.delete}
-      {poll}
-    />
-  {/if}
-{/each}
+{#if $PollStore.length}
+  {#each $PollStore as poll (poll.id)}
+    {#if poll.open}
+      <PollCard
+        on:vote={pollHandlers.vote}
+        on:close={pollHandlers.close}
+        on:delete={pollHandlers.delete}
+        {poll}
+      />
+    {/if}
+  {/each}
+{:else}
+  <p class="font-light opacity-90">
+    There are no polls<br />Be the first to
+    <a href="create">create</a>
+  </p>
+{/if}

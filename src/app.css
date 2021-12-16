@@ -28,3 +28,8 @@ button.btn-secondary {
   @apply p-4 shadow-md hover:shadow-lg bg-slate-600
     rounded-lg space-y-4 mb-4;
 }
+
+a {
+  @apply underline text-blue-300 decoration-blue-300 hover:text-blue-400
+  hover:decoration-blue-400;
+}

@@ -6,6 +6,7 @@
 </script>
 
 <nav class="flex justify-center space-x-7 my-8">
+  <h1 class="hidden">navigation bar</h1>
   {#each paths as path}
     <a
       href={path.path}
@@ -17,7 +18,7 @@
 
 <style>
   a {
-    @apply text-xl font-semibold 
-        transition-colors;
+    @apply text-xl font-semibold text-gray-100
+        transition-colors no-underline;
   }
 </style>
