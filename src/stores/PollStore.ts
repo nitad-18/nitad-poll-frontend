@@ -71,10 +71,33 @@ const createPollStore = () => {
     update((currentPolls) => [poll, ...currentPolls])
   }
 
+  const remove = (pollId: string) => {
+    update((currentPolls) => currentPolls.filter((poll) => poll.id !== pollId))
+  }
+
+  const close = (pollId: string) => {
+    update((currentPolls) => {
+      currentPolls.find((poll) => poll.id === pollId).open = false
+      return currentPolls
+    })
+  }
+
+  const vote = (pollId: string, option: string) => {
+    update((currentPolls) => {
+      const poll = currentPolls.find((poll) => poll.id === pollId)
+      poll.options.find((opt) => opt[0] === option)[1]++
+      poll.votes++
+      return currentPolls
+    })
+  }
+
   return {
     subscribe,
     sort,
     add,
+    remove,
+    close,
+    vote,
   }
 }
 

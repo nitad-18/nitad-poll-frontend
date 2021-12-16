@@ -3,11 +3,15 @@
   import type { SortMode } from '$lib/types'
   import PollStore from '../../src/stores/PollStore'
 
-  const handlePollDelete = (e: CustomEvent<{ pollId: string }>) => {
-    console.log(e.detail.pollId)
-  }
-
   const sortModes: SortMode[] = ['latest', 'popularity']
+  const pollHandlers = {
+    delete: (e: CustomEvent<{ pollId: string }>) =>
+      PollStore.remove(e.detail.pollId),
+    close: (e: CustomEvent<{ pollId: string }>) =>
+      PollStore.close(e.detail.pollId),
+    vote: (e: CustomEvent<{ pollId: string; option: string }>) =>
+      PollStore.vote(e.detail.pollId, e.detail.option),
+  }
 
   let sortMode: SortMode = 'latest'
 
@@ -32,6 +36,11 @@
 
 {#each $PollStore as poll (poll.id)}
   {#if poll.open}
-    <PollCard on:delete={handlePollDelete} {poll} />
+    <PollCard
+      on:vote={pollHandlers.vote}
+      on:close={pollHandlers.close}
+      on:delete={pollHandlers.delete}
+      {poll}
+    />
   {/if}
 {/each}
