@@ -8,15 +8,14 @@
   const dispatch = createEventDispatcher<{
     delete: { pollId: string }
     close: { pollId: string }
+    vote: { pollId: string; option: string }
   }>()
-
-  const handleVote = (event: CustomEvent<{ option: string }>) => {
-    console.log(event.detail.option)
-  }
 
   const emit = {
     delete: () => dispatch('delete', { pollId: poll.id }),
     close: () => dispatch('close', { pollId: poll.id }),
+    vote: (event: CustomEvent<{ option: string }>) =>
+      dispatch('vote', { pollId: poll.id, option: event.detail.option }),
   }
 </script>
 
@@ -31,7 +30,7 @@
   <main>
     <ul class="space-y-4">
       {#each poll.options as pollOption, index}
-        <PollOption on:vote={handleVote} {index} {pollOption} totalVotes={poll.votes} />
+        <PollOption on:vote={emit.vote} {index} {pollOption} totalVotes={poll.votes} />
       {/each}
     </ul>
   </main>
