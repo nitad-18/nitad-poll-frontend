@@ -1,17 +1,17 @@
 <script lang="ts">
   import PollStore from '../stores/PollStore'
   import type { PollDetail } from '$lib/types'
+  import { goto } from '$app/navigation'
+  import { onMount } from 'svelte'
 
   let fields: {
     question: string
     options: [string, number][]
   } = {
     question: '',
-    options: [
-      ['', 0],
-      ['', 0],
-    ],
+    options: [['', 0]],
   }
+  let questionInput: HTMLInputElement
   let valid = false
 
   const submitHandler = () => {
@@ -27,21 +27,25 @@
         return [poll, ...currentPolls]
       })
 
+      goto('/')
     }
   }
 
   const addOption = () => {
     fields.options[fields.options.length] = ['', 0]
   }
+
+  onMount(() => {
+    questionInput.focus()
+  })
 </script>
 
 <div>
-  <form on:submit|preventDefault={submitHandler} class="p-5 shadow-md bg-slate-600">
+  <form on:submit|preventDefault={submitHandler} class="p-5 shadow-md bg-slate-600 rounded-lg">
     <h1>Question:</h1>
     <div class="form-field">
       <input
-        type="text"
-        id="question"
+        bind:this={questionInput}
         class="bg-slate-500 rounded h-10 px-4"
         bind:value={fields.question}
       />
@@ -49,16 +53,11 @@
     <h1>Options:</h1>
     {#each fields.options as option}
       <div class="form-field">
-        <input
-          type="text"
-          id="answer-"
-          class="bg-slate-500 rounded h-10 px-4"
-          bind:value={option[0]}
-        />
+        <input type="text" class="bg-slate-500 rounded h-10 px-4" bind:value={option[0]} />
       </div>
     {/each}
 
-    <button type="button" class="text-gray-200 mb-3 underline align-middle" on:click={addOption}
+    <button type="button" class="text-gray-200 mb-3 underline text-sm" on:click={addOption}
       >Add Option</button
     >
     <br />
@@ -79,9 +78,5 @@
     width: 100%;
     border-radius: 6px;
     color: white;
-  }
-  label {
-    margin: 10px auto;
-    text-align: left;
   }
 </style>
