@@ -1,4 +1,4 @@
-export type PollOption = [string, number]
+export type PollOption = [string /* option */, number /* votes on this option*/]
 
 export type PollDetail = {
   id: string
