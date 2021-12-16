@@ -1,7 +1,5 @@
 <script lang="ts">
   import PollCard from '$lib/PollCard/PollCard.svelte'
-  import { onMount, onDestroy } from 'svelte';
-  import type { PollDetail } from '$lib/types'
   import PollStore from '../../src/stores/PollStore';
 
   const handlePollDelete = (e: CustomEvent<{ pollId: string }>) => {
