@@ -3,6 +3,8 @@
   import type { PollDetail } from '$lib/types'
   import { goto } from '$app/navigation'
   import { onMount } from 'svelte'
+  import { fade } from 'svelte/transition'
+  import { flip } from 'svelte/animate'
 
   let fields: {
     question: string
@@ -43,7 +45,13 @@
   }
 
   const addOption = () => {
-    fields.options[fields.options.length] = ['', 0]
+    fields.options = [['', 0], ...fields.options]
+  }
+
+  const autofocus = (e: CustomEvent, index: number) => {
+    if (index === 0) {
+      ;(e.target as HTMLInputElement).focus()
+    }
   }
 
   onMount(() => {
@@ -62,15 +70,16 @@
     />
   </div>
   <h1>Options:</h1>
-  {#each fields.options as option}
-    <div class="form-field">
-      <input
-        type="text"
-        class="bg-slate-500 rounded h-10 px-4"
-        bind:value={option[0]}
-        required
-      />
-    </div>
+  {#each fields.options as option, index (option)}
+    <input
+      type="text"
+      animate:flip={{ duration: 300 }}
+      in:fade={{ duration: 0 }}
+      on:introstart={(e) => autofocus(e, index)}
+      class="bg-slate-500 rounded h-10 px-4"
+      bind:value={option[0]}
+      required
+    />
   {/each}
 
   <button
@@ -87,9 +96,6 @@
     width: 400px;
     margin: 0 auto;
     text-align: center;
-  }
-  .form-field {
-    margin: 18px auto;
   }
   input {
     width: 100%;

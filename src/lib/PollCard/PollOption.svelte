@@ -2,7 +2,7 @@
   import type { PollOption } from '$lib/types'
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion'
-  import { cubicInOut } from 'svelte/easing'
+  import { cubicOut } from 'svelte/easing'
 
   export let pollOption: PollOption
   export let totalVotes: number
@@ -15,7 +15,7 @@
   $: bgColor = optionColors[index % optionColors.length]
 
   // $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1)
-  const bgWidth = tweened(undefined, { duration: 500, easing: cubicInOut })
+  const bgWidth = tweened(undefined, { duration: 500, easing: cubicOut })
   $: $bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
 
   const emit = {
