@@ -6,4 +6,7 @@ export type PollDetail = {
   options: PollOption[]
   votes: number // total votes on this poll
   open: boolean // true means the poll is currently open
+  createdAt: Date
 }
+
+export type SortMode = 'latest' | 'popularity'
