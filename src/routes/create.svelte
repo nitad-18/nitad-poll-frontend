@@ -19,7 +19,12 @@
 
     // add new poll
     if (valid) {
-      const poll: PollDetail = { ...fields, id: Math.random() + '', open: true, votes: 0 }
+      const poll: PollDetail = {
+        ...fields,
+        id: Math.random() + '',
+        open: true,
+        votes: 0,
+      }
 
       // save poll to store
       PollStore.update((currentPolls) => {
@@ -40,30 +45,34 @@
   })
 </script>
 
-<div>
-  <form on:submit|preventDefault={submitHandler} class="p-5 shadow-md bg-slate-600 rounded-lg">
-    <h1>Question:</h1>
+<form on:submit|preventDefault={submitHandler} class="card p-5">
+  <h1>Question:</h1>
+  <div class="form-field">
+    <input
+      bind:this={questionInput}
+      class="bg-slate-500 rounded h-10 px-4"
+      bind:value={fields.question}
+    />
+  </div>
+  <h1>Options:</h1>
+  {#each fields.options as option}
     <div class="form-field">
       <input
-        bind:this={questionInput}
+        type="text"
         class="bg-slate-500 rounded h-10 px-4"
-        bind:value={fields.question}
+        bind:value={option[0]}
       />
     </div>
-    <h1>Options:</h1>
-    {#each fields.options as option}
-      <div class="form-field">
-        <input type="text" class="bg-slate-500 rounded h-10 px-4" bind:value={option[0]} />
-      </div>
-    {/each}
+  {/each}
 
-    <button type="button" class="text-gray-200 mb-3 underline text-sm" on:click={addOption}
-      >Add Option</button
-    >
-    <br />
-    <button type="submit" class="btn-primary" value="Add Poll">Submit</button>
-  </form>
-</div>
+  <button
+    type="button"
+    class="text-gray-200 mb-3 underline text-sm"
+    on:click={addOption}>Add Option</button
+  >
+  <br />
+  <button type="submit" class="btn-primary" value="Add Poll">Submit</button>
+</form>
 
 <style>
   form {

@@ -23,3 +23,8 @@ button.btn-primary {
 button.btn-secondary {
   @apply border hover:bg-slate-700;
 }
+
+.card {
+  @apply p-4 shadow-md hover:shadow-lg bg-slate-600
+    rounded-lg space-y-4 mb-4;
+}

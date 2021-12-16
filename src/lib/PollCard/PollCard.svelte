@@ -28,10 +28,7 @@
   }
 </script>
 
-<article
-  class="p-4 shadow-md hover:shadow-lg bg-slate-600
-			rounded-lg space-y-4 mb-4"
->
+<article class="card">
   <header>
     <h2 class="text-xl">{poll.question}</h2>
     <span class="font-extralight opacity-80">Total votes: {poll.votes}</span>
@@ -39,15 +36,18 @@
   <main>
     <ul class="space-y-4">
       {#each poll.options as pollOption, index}
-        <PollOption on:vote={emit.vote} {index} {pollOption} totalVotes={poll.votes} />
+        <PollOption
+          on:vote={emit.vote}
+          {index}
+          {pollOption}
+          totalVotes={poll.votes}
+        />
       {/each}
     </ul>
   </main>
   {#if poll.open}
     <div class="flex justify-center space-x-4">
-      <button on:click={emit.delete} class="btn-primary"
-        >delete</button
-      >
+      <button on:click={emit.delete} class="btn-primary">delete</button>
       <button on:click={emit.close} class="btn-secondary">Close</button>
     </div>
   {/if}
