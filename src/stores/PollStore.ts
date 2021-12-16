@@ -59,18 +59,22 @@ const createPollStore = () => {
 
   const sort = (by: SortMode) => {
     if (by === 'popularity') {
-      update((polls) => {
-        return polls.sort((a, b) => b.votes - a.votes)
-      })
+      update((polls) => polls.sort((a, b) => b.votes - a.votes))
+      return
     }
     update((polls) => {
       return polls.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
     })
   }
 
+  const add = (poll: PollDetail) => {
+    update((currentPolls) => [poll, ...currentPolls])
+  }
+
   return {
     subscribe,
     sort,
+    add,
   }
 }
 

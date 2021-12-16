@@ -35,12 +35,10 @@
       id: Math.random() + '',
       open: true,
       votes: 0,
+      createdAt: new Date(),
     }
     // save poll to store
-    PollStore.update((currentPolls) => {
-      console.log(currentPolls)
-      return [poll, ...currentPolls]
-    })
+    PollStore.add(poll)
     goto('/')
   }
 
