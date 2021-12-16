@@ -26,7 +26,7 @@
   ]
 
   onMount(() => {
-    // Prefetch all routes to speed things up page navigation.
+    // prefetch all routes to speed up subsequent page navigation.
     // https://kit.svelte.dev/docs#modules-$app-navigation
     prefetchRoutes()
   })
