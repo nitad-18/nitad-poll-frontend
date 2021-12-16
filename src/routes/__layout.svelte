@@ -12,7 +12,9 @@
 </script>
 
 <script lang="ts">
+  import { prefetchRoutes } from '$app/navigation'
   import Nav from '$lib/Nav/Nav.svelte'
+  import { onMount } from 'svelte'
   import '../app.css'
 
   export let currentPath: string
@@ -22,6 +24,12 @@
     { name: 'Create Poll', path: '/create' },
     { name: 'Closed Polls', path: '/closed' },
   ]
+
+  onMount(() => {
+    // Prefetch all routes to speed things up page navigation.
+    // https://kit.svelte.dev/docs#modules-$app-navigation
+    prefetchRoutes()
+  })
 </script>
 
 <header
