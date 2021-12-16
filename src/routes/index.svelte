@@ -7,8 +7,9 @@
     console.log(e.detail.pollId)
   }
 
-  let sortMode: SortMode = 'latest'
   const sortModes: SortMode[] = ['latest', 'popularity']
+
+  let sortMode: SortMode = 'latest'
 
   $: PollStore.sort(sortMode)
 </script>
@@ -24,7 +25,7 @@
     <button
       on:click={() => (sortMode = mode)}
       class="px-2 py-0 transition-colors"
-      class:bg-red-400={mode === sortMode}>{mode}</button
+      class:bg-rose-600={mode === sortMode}>{mode}</button
     >
   {/each}
 </header>
