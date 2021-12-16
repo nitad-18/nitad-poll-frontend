@@ -1,17 +1,19 @@
-<script>
+<script lang="ts">
   import PollStore from '../stores/PollStore'
   import { createEventDispatcher } from 'svelte'
-
+  import type { PollDetail } from '$lib/types'
 
   let dispatch = createEventDispatcher()
-  let fields = {
+  let fields: {
+    question: string
+    options: [string, number][]
+  } = {
     question: '',
     options: [
       ['Python', 0],
       ['JavaScript', 0],
     ],
   }
-
   let valid = false
 
   const submitHandler = () => {
@@ -19,7 +21,7 @@
 
     // add new poll
     if (valid) {
-      let poll = { ...fields, id: Math.random() + '', open: true, votes: 0 }
+      const poll: PollDetail = { ...fields, id: Math.random() + '', open: true, votes: 0 }
 
       // save poll to store
       PollStore.update((currentPolls) => {
@@ -45,19 +47,16 @@
         class="bg-slate-500 rounded h-10 px-4"
         bind:value={fields.question}
       />
-
     </div>
     <h1>Options:</h1>
     {#each fields.options as option}
       <div class="form-field">
-
         <input
           type="text"
           id="answer-"
           class="bg-slate-500 rounded h-10 px-4"
           bind:value={option[0]}
         />
-
       </div>
     {/each}
 
@@ -65,12 +64,7 @@
       >Add Option</button
     >
     <br />
-    <button
-      type="submit"
-      class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg 
-    font-medium capitalize"
-      value="Add Poll">Submit</button
-    >
+    <button type="submit" class="btn-primary" value="Add Poll">Submit</button>
   </form>
 </div>
 
@@ -92,5 +86,4 @@
     margin: 10px auto;
     text-align: left;
   }
-
 </style>
