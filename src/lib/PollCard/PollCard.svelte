@@ -36,10 +36,10 @@
   </main>
   {#if poll.open}
     <div class="flex justify-center space-x-4">
-      <button on:click={emit.delete} class="bg-rose-600 hover:bg-rose-700 border-rose-600"
+      <button on:click={emit.delete} class="btn-primary"
         >delete</button
       >
-      <button on:click={emit.close} class="border hover:bg-slate-700">Close</button>
+      <button on:click={emit.close} class="btn-secondary">Close</button>
     </div>
   {/if}
 </article>

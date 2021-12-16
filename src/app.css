@@ -17,3 +17,9 @@ body {
 button {
   @apply px-4 py-2 rounded-lg font-medium capitalize;
 }
+button.btn-primary {
+  @apply bg-rose-600 hover:bg-rose-700 border-rose-600;
+}
+button.btn-secondary {
+  @apply border hover:bg-slate-700;
+}
