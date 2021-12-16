@@ -49,6 +49,10 @@
   }
 
   const autofocus = (e: CustomEvent, index: number) => {
+    if (!fields.question.trim()) {
+      questionInput.focus()
+      return
+    }
     if (index === 0) {
       ;(e.target as HTMLInputElement).focus()
     }
@@ -64,14 +68,12 @@
   class="card p-5 text-center w-[32rem] mx-auto"
 >
   <h1>Question:</h1>
-  <div class="form-field">
-    <input
-      bind:this={questionInput}
-      bind:value={fields.question}
-      placeholder="Your question"
-      required
-    />
-  </div>
+  <input
+    bind:this={questionInput}
+    bind:value={fields.question}
+    placeholder="Your question"
+    required
+  />
   <h1>Options:</h1>
   {#each fields.options as option, index (option)}
     <input
