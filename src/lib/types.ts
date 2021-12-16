@@ -1,5 +1,8 @@
+export type PollOption = [string, number]
+
 export type PollDetail = {
   id: string
   question: string
-  options: { [option: string]: number }
+  options: PollOption[]
+  votes: number
 }
