@@ -5,10 +5,14 @@
 
   export let poll: PollDetail
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{ delete: { pollId: string } }>()
 
   const handleDelete = () => {
-    dispatch('delete', poll.id)
+    dispatch('delete', { pollId: poll.id })
+  }
+
+  const handleVote = (event: CustomEvent<{ option: string }>) => {
+    console.log(event.detail.option)
   }
 </script>
 
@@ -23,17 +27,19 @@
   <main>
     <ul class="space-y-4">
       {#each poll.options as pollOption, index}
-        <PollOption {index} {pollOption} totalVotes={poll.votes} />
+        <PollOption on:vote={handleVote} {index} {pollOption} totalVotes={poll.votes} />
       {/each}
     </ul>
   </main>
-  <div class="flex justify-center">
-    <button
-      on:click={handleDelete}
-      class="bg-rose-600 hover:bg-rose-700 px-4 py-2 rounded-lg 
-            font-medium"
-    >
-      Delete
-    </button>
-  </div>
+  {#if poll.open}
+    <div class="flex justify-center">
+      <button
+        on:click={handleDelete}
+        class="bg-rose-600 hover:bg-rose-700 px-4 py-2 rounded-lg 
+            font-medium capitalize"
+      >
+        delete
+      </button>
+    </div>
+  {/if}
 </article>

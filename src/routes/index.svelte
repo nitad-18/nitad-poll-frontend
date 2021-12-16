@@ -11,10 +11,17 @@
         ['JavaScript', 9],
       ],
       votes: 24,
+      open: true,
     },
   ]
+
+  const handlePollDelete = (e: CustomEvent<{ pollId: string }>) => {
+    console.log(e.detail.pollId)
+  }
 </script>
 
 <h1 class="mb-4">Current Polls ({polls.length})</h1>
 
-{#each polls as poll (poll.id)}<PollCard {poll} />{/each}
+{#each polls as poll (poll.id)}
+  <PollCard on:delete={handlePollDelete} {poll} />
+{/each}

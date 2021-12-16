@@ -5,4 +5,5 @@ export type PollDetail = {
   question: string
   options: PollOption[]
   votes: number
+  open: boolean // true means the poll is currently open
 }
