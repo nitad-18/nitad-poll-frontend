@@ -20,6 +20,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>NITAD Poll</title>
+</svelte:head>
+
 <h1 class="mb-4">Current Polls ({polls.length})</h1>
 
 {#each polls as poll (poll.id)}
