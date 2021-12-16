@@ -12,28 +12,36 @@
     options: [['', 0]],
   }
   let questionInput: HTMLInputElement
-  let valid = false
+
+  const validateForm = () => {
+    // check if question is empty
+    if (fields.question.trim() === '') {
+      return false
+    }
+    // check if options are empty
+    for (const [option] of fields.options) {
+      if (option.trim() === '') {
+        return false
+      }
+    }
+    return true
+  }
 
   const submitHandler = () => {
-    valid = true
+    if (!validateForm()) return
 
-    // add new poll
-    if (valid) {
-      const poll: PollDetail = {
-        ...fields,
-        id: Math.random() + '',
-        open: true,
-        votes: 0,
-      }
-
-      // save poll to store
-      PollStore.update((currentPolls) => {
-        console.log(currentPolls)
-        return [poll, ...currentPolls]
-      })
-
-      goto('/')
+    const poll: PollDetail = {
+      ...fields,
+      id: Math.random() + '',
+      open: true,
+      votes: 0,
     }
+    // save poll to store
+    PollStore.update((currentPolls) => {
+      console.log(currentPolls)
+      return [poll, ...currentPolls]
+    })
+    goto('/')
   }
 
   const addOption = () => {
@@ -52,6 +60,7 @@
       bind:this={questionInput}
       class="bg-slate-500 rounded h-10 px-4"
       bind:value={fields.question}
+      required
     />
   </div>
   <h1>Options:</h1>
@@ -61,6 +70,7 @@
         type="text"
         class="bg-slate-500 rounded h-10 px-4"
         bind:value={option[0]}
+        required
       />
     </div>
   {/each}
