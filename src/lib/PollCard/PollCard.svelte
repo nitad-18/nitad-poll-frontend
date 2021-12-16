@@ -6,8 +6,17 @@
   export let poll: PollDetail
 
   const dispatch = createEventDispatcher<{
+    /**
+     * Emitted when the poll owner clicks the "Delete" button of a poll specified by `pollId`.
+     */
     delete: { pollId: string }
+    /**
+     * Emitted when the poll owner clicks the "Close" button of a poll specified by `pollId`.
+     */
     close: { pollId: string }
+    /**
+     * Emitted when a user votes on an option specified by `option` of a poll specified by `pollId`.
+     */
     vote: { pollId: string; option: string }
   }>()
 
