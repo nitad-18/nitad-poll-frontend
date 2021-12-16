@@ -14,9 +14,8 @@
   $: [option, votes] = pollOption
   $: bgColor = optionColors[index % 3]
 
-  // $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1) + '%'
+  // $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1)
   const bgWidth = tweened(undefined, { duration: 500, easing: cubicInOut })
-  // $: $bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
   $: $bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
 
   const handleVote = () => {
