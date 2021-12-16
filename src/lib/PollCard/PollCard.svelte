@@ -30,7 +30,7 @@
 
 <article
   class="p-4 shadow-md hover:shadow-lg bg-slate-600
-			rounded-lg space-y-4"
+			rounded-lg space-y-4 mb-4"
 >
   <header>
     <h2 class="text-xl">{poll.question}</h2>
