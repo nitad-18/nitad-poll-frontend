@@ -12,6 +12,16 @@ const PollStore = writable<PollDetail[]>([
     votes: 24,
     open: true,
   },
+  {
+    id: '2',
+    question: 'Comp Sys Arch or HW Syn Lab?',
+    options: [
+      ['Comp Sys Arch', 25],
+      ['HW Syn Lab', 9],
+    ],
+    votes: 34,
+    open: false,
+  },
 ])
 
 export default PollStore

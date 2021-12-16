@@ -11,8 +11,10 @@
   <title>NITAD Poll</title>
 </svelte:head>
 
-<h1 class="mb-4">Current Polls ({$PollStore.length})</h1>
+<h1 class="mb-4">Current Polls ({$PollStore.filter(p => p.open).length})</h1>
 
 {#each $PollStore as poll (poll.id)}
-  <PollCard on:delete={handlePollDelete} {poll} />
+  {#if poll.open}
+    <PollCard on:delete={handlePollDelete} {poll} />
+  {/if}
 {/each}
