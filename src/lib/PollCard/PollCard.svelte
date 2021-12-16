@@ -5,14 +5,18 @@
 
   export let poll: PollDetail
 
-  const dispatch = createEventDispatcher<{ delete: { pollId: string } }>()
-
-  const handleDelete = () => {
-    dispatch('delete', { pollId: poll.id })
-  }
+  const dispatch = createEventDispatcher<{
+    delete: { pollId: string }
+    close: { pollId: string }
+  }>()
 
   const handleVote = (event: CustomEvent<{ option: string }>) => {
     console.log(event.detail.option)
+  }
+
+  const emit = {
+    delete: () => dispatch('delete', { pollId: poll.id }),
+    close: () => dispatch('close', { pollId: poll.id }),
   }
 </script>
 
@@ -32,14 +36,11 @@
     </ul>
   </main>
   {#if poll.open}
-    <div class="flex justify-center">
-      <button
-        on:click={handleDelete}
-        class="bg-rose-600 hover:bg-rose-700 px-4 py-2 rounded-lg 
-            font-medium capitalize"
+    <div class="flex justify-center space-x-4">
+      <button on:click={emit.delete} class="bg-rose-600 hover:bg-rose-700 border-rose-600"
+        >delete</button
       >
-        delete
-      </button>
+      <button on:click={emit.close} class="border hover:bg-slate-700">Close</button>
     </div>
   {/if}
 </article>

@@ -18,13 +18,13 @@
   const bgWidth = tweened(undefined, { duration: 500, easing: cubicInOut })
   $: $bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
 
-  const handleVote = () => {
-    dispatch('vote', { option })
+  const emit = {
+    vote: () => dispatch('vote', { option }),
   }
 </script>
 
 <li
-  on:click={handleVote}
+  on:click={emit.vote}
   class="bg-slate-500 rounded relative h-14 overflow-hidden
         cursor-pointer"
 >
