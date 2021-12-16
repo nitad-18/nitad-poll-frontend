@@ -3,7 +3,7 @@
   import type { PollDetail } from '$lib/types'
   import { goto } from '$app/navigation'
   import { onMount } from 'svelte'
-  import { fade } from 'svelte/transition'
+  import { fly } from 'svelte/transition'
   import { flip } from 'svelte/animate'
 
   let fields: {
@@ -59,13 +59,16 @@
   })
 </script>
 
-<form on:submit|preventDefault={submitHandler} class="card p-5">
+<form
+  on:submit|preventDefault={submitHandler}
+  class="card p-5 text-center w-[32rem] mx-auto"
+>
   <h1>Question:</h1>
   <div class="form-field">
     <input
       bind:this={questionInput}
-      class="bg-slate-500 rounded h-10 px-4"
       bind:value={fields.question}
+      placeholder="Your question"
       required
     />
   </div>
@@ -74,10 +77,10 @@
     <input
       type="text"
       animate:flip={{ duration: 300 }}
-      in:fade={{ duration: 0 }}
+      in:fly={{ duration: 500, y: 10 }}
       on:introstart={(e) => autofocus(e, index)}
-      class="bg-slate-500 rounded h-10 px-4"
       bind:value={option[0]}
+      placeholder="Option {fields.options.length - index}"
       required
     />
   {/each}
@@ -92,14 +95,7 @@
 </form>
 
 <style>
-  form {
-    width: 400px;
-    margin: 0 auto;
-    text-align: center;
-  }
   input {
-    width: 100%;
-    border-radius: 6px;
-    color: white;
+    @apply bg-slate-500 rounded h-10 px-4 w-full;
   }
 </style>
