@@ -6,6 +6,9 @@
   import { fly } from 'svelte/transition'
   import { flip } from 'svelte/animate'
 
+  /**
+   * current form data
+   */
   let fields: {
     question: string
     options: [string, number][]
@@ -13,8 +16,14 @@
     question: '',
     options: [['', 0]],
   }
+  /**
+   * the qustion <input />
+   */
   let questionInput: HTMLInputElement
 
+  /**
+   * validate the form before submitting
+   */
   const validateForm = () => {
     // check if question is empty
     if (fields.question.trim() === '') {
@@ -29,9 +38,11 @@
     return true
   }
 
-  const submitHandler = () => {
+  const handleSubmit = () => {
+    // validate the form
     if (!validateForm()) return
 
+    // create the poll from the validated form data
     const poll: PollDetail = {
       ...fields,
       id: Math.random() + '',
@@ -41,13 +52,20 @@
     }
     // save poll to store
     PollStore.add(poll)
+    // navigate to the current polls page
     goto('/')
   }
 
+  /**
+   * add a new option to the form
+   */
   const addOption = () => {
     fields.options = [['', 0], ...fields.options]
   }
 
+  /**
+   * manage autofocus on inputs
+   */
   const autofocus = (e: CustomEvent, index: number) => {
     if (!fields.question.trim()) {
       questionInput.focus()
@@ -64,7 +82,7 @@
 </script>
 
 <form
-  on:submit|preventDefault={submitHandler}
+  on:submit|preventDefault={handleSubmit}
   class="card p-5 text-center w-[32rem] mx-auto"
 >
   <h1>Question:</h1>
