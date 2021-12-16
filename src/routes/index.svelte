@@ -1,4 +1,5 @@
 <script lang="ts">
+  import NoPollMessage from '$lib/NoPollMessage/NoPollMessage.svelte'
   import PollCard from '$lib/PollCard/PollCard.svelte'
   import type { SortMode } from '$lib/types'
   import PollStore from '../../src/stores/PollStore'
@@ -46,8 +47,5 @@
     {/if}
   {/each}
 {:else}
-  <p class="font-light opacity-90">
-    There are no polls<br />Be the first to
-    <a href="create">create</a>
-  </p>
+  <NoPollMessage />
 {/if}

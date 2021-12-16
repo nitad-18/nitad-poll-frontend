@@ -1,16 +1,23 @@
 <script lang="ts">
+  import NoPollMessage from '$lib/NoPollMessage/NoPollMessage.svelte'
   import PollCard from '$lib/PollCard/PollCard.svelte'
-  import PollStore from '../../src/stores/PollStore';
+  import PollStore from '../../src/stores/PollStore'
 </script>
 
 <svelte:head>
   <title>Closed Polls</title>
 </svelte:head>
 
-<h1 class="mb-4">Closed Polls page ({$PollStore.filter(p => !p.open).length})</h1>
+<h1 class="mb-4">
+  Closed Polls page ({$PollStore.filter((p) => !p.open).length})
+</h1>
 
-{#each $PollStore as poll (poll.id)}
-  {#if !poll.open}
-    <PollCard {poll} />
-  {/if}
-{/each}
+{#if $PollStore.length}
+  {#each $PollStore as poll (poll.id)}
+    {#if !poll.open}
+      <PollCard {poll} />
+    {/if}
+  {/each}
+{:else}
+  <NoPollMessage />
+{/if}
