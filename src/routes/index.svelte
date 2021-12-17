@@ -8,12 +8,15 @@
 
   const sortModes: SortMode[] = ['latest', 'popularity']
   const pollHandlers = {
-    delete: (e: CustomEvent<{ pollId: number }>) =>
-      pollStore.remove(e.detail.pollId),
-    close: (e: CustomEvent<{ pollId: number }>) =>
-      pollStore.close(e.detail.pollId),
-    vote: (e: CustomEvent<{ pollId: number; option: string }>) =>
-      pollStore.vote(e.detail.pollId, e.detail.option, currentSortMode),
+    delete: (e: CustomEvent<{ pollId: number }>) => {
+      // TODO-events handle with pollStore
+    },
+    close: (e: CustomEvent<{ pollId: number }>) => {
+      // TODO-events handle with pollStore
+    },
+    vote: (e: CustomEvent<{ pollId: number; option: string }>) => {
+      // TODO-events handle with pollStore
+    },
   }
 
   $: pollStore.sort(currentSortMode)
@@ -40,12 +43,8 @@
 
 {#if openPolls.length}
   {#each openPolls as poll (poll.id)}
-    <PollCard
-      on:vote={pollHandlers.vote}
-      on:close={pollHandlers.close}
-      on:delete={pollHandlers.delete}
-      {poll}
-    />
+    <!-- TODO-events poll events emitted from <PollCard> -->
+    <PollCard {poll} />
   {/each}
 {:else}
   <div><NoPollMessage /></div>

@@ -5,7 +5,30 @@ import type { SortMode, PollDetail } from '$lib/types'
  * a custom store is just a function that returns at least a `subscribe` function
  */
 const createPollStore = () => {
-  const { subscribe, update } = writable<PollDetail[]>([])
+  const { subscribe, update } = writable<PollDetail[]>([
+    {
+      id: 1,
+      question: 'Python or JavaScript?',
+      options: [
+        ['Python', 15],
+        ['JavaScript', 9],
+      ],
+      votes: 24,
+      open: true,
+      createdAt: new Date(),
+    },
+    {
+      id: 2,
+      question: 'Comp Sys Arch or HW Syn Lab?',
+      options: [
+        ['Comp Sys Arch', 25],
+        ['HW Syn Lab', 9],
+      ],
+      votes: 34,
+      open: true,
+      createdAt: new Date(Date.now() - 86400000), // yesterday
+    },
+  ])
 
   /**
    * sort the polls in the store by the given mode
@@ -34,7 +57,7 @@ const createPollStore = () => {
    * @param pollId The id of the poll to be removed
    */
   const remove = (pollId: number) => {
-    update((currentPolls) => currentPolls.filter((poll) => poll.id !== pollId))
+    // TODO-events
   }
 
   /**
@@ -42,10 +65,7 @@ const createPollStore = () => {
    * @param pollId The id of the poll to be closed
    */
   const close = (pollId: number) => {
-    update((currentPolls) => {
-      currentPolls.find((poll) => poll.id === pollId).open = false
-      return currentPolls
-    })
+    // TODO-events
   }
 
   /**
@@ -55,15 +75,9 @@ const createPollStore = () => {
    * @param sortMode The current sort mode that is being used
    */
   const vote = (pollId: number, option: string, sortMode: SortMode) => {
-    update((currentPolls) => {
-      const poll = currentPolls.find((poll) => poll.id === pollId)
-      poll.options.find((opt) => opt[0] === option)[1]++
-      poll.votes++
-      return currentPolls
-    })
-    if (sortMode === 'popularity') {
-      sort(sortMode)
-    }
+    // TODO-events
+    // update the number of votes on the option of a poll
+    // if the sort mode is 'popularity' then sort the polls in case there is a change in order
   }
 
   return {
