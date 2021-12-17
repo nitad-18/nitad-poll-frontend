@@ -1,7 +1,9 @@
 <script lang="ts">
+  import type { PagePathDetail } from './types'
+
   // path is recieved from the script above
   export let currentPath: string
-  export let paths: { name: string; path: string }[]
+  export let paths: PagePathDetail[]
 </script>
 
 <nav class="flex justify-center space-x-7 my-8">

@@ -16,12 +16,13 @@
   import Header from '$lib/Header.svelte'
   import Nav from '$lib/Nav.svelte'
   import PageTransition from '$lib/PageTransition.svelte'
+  import type { PagePathDetail } from '$lib/types'
   import { onMount } from 'svelte'
   import '../app.css'
 
   export let currentPath: string
 
-  const paths = [
+  const paths: PagePathDetail[] = [
     { name: 'Current Polls', path: '/' },
     { name: 'Create Poll', path: '/create' },
     { name: 'Closed Polls', path: '/closed' },

@@ -10,3 +10,8 @@ export type PollDetail = {
 }
 
 export type SortMode = 'latest' | 'popularity'
+
+export type PagePathDetail = {
+  path: string
+  name: string
+}
