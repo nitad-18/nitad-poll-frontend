@@ -45,14 +45,6 @@ const createPollStore = () => {
   }
 
   /**
-   * add a new poll to the store
-   * @param poll The new poll to be added to the store
-   */
-  const add = (poll: PollDetail) => {
-    // TODO-create-poll
-  }
-
-  /**
    * remove a poll given its id from the store
    * @param pollId The id of the poll to be removed
    */
@@ -83,7 +75,6 @@ const createPollStore = () => {
   return {
     subscribe,
     sort,
-    add,
     remove,
     close,
     vote,
