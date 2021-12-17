@@ -23,6 +23,8 @@
   import { fade } from 'svelte/transition'
   import '../app.css'
   import LoginRegisterForm from '$lib/LoginRegisterForm.svelte'
+  import axiosInstance from '../axios'
+  import user from '../stores/userStore'
 
   export let currentPath: string
 
@@ -32,10 +34,16 @@
     { name: 'Closed Polls', path: '/closed' },
   ]
 
-  onMount(() => {
+  onMount(async () => {
     // prefetch all routes to speed up subsequent page navigation.
     // https://kit.svelte.dev/docs#modules-$app-navigation
     prefetchRoutes()
+    // check if user is already logged in
+    const userData = await axiosInstance.checkMe()
+    user.set(userData)
+    if (!userData) {
+      showLoginModal.set(true)
+    }
   })
 </script>
 

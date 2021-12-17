@@ -24,9 +24,18 @@ const login = async (
   return response.status === 200 ? data : null
 }
 
+const checkMe = async (): Promise<User | null> => {
+  const response = await instance.get('auth/me')
+  if (response.status === 200) {
+    return (await response.data) as User
+  }
+  return null
+}
+
 const axiosInstance = {
   logout,
   login,
+  checkMe,
 }
 
 export default axiosInstance
