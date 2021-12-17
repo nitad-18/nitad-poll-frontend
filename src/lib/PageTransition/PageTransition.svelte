@@ -1,18 +1,21 @@
 <script lang="ts">
-  import { fade, slide } from 'svelte/transition'
+  import { fly } from 'svelte/transition'
 
   export let currentPath: string
 
   const transitionDur = 200
+  const y = -20
 </script>
 
 <!-- https://svelte.dev/docs#template-syntax-key -->
 {#key currentPath}
-  <main
-    out:fade={{ duration: transitionDur - 5 }}
-    in:slide={{ delay: transitionDur }}
-    class="mx-14 md:mx-32 lg:mx-80"
-  >
-    <slot />
-  </main>
+  <div class="absolute w-full">
+    <main
+      in:fly={{ delay: transitionDur, y }}
+      out:fly={{ duration: transitionDur, y }}
+      class="mx-14 md:mx-32 lg:mx-80"
+    >
+      <slot />
+    </main>
+  </div>
 {/key}
