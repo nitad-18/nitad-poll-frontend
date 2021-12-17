@@ -50,7 +50,7 @@
     return {
       question,
       options: options.map(([option]) => [option, 0]) as [string, number][],
-      id: Math.random() + '',
+      id: Math.random(),
       open: true,
       votes: 0,
       createdAt: new Date(),
