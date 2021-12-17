@@ -14,10 +14,13 @@
 <script lang="ts">
   import { prefetchRoutes } from '$app/navigation'
   import Header from '$lib/Header.svelte'
+  import Modal from '$lib/Modal.svelte'
   import Nav from '$lib/Nav.svelte'
   import PageTransition from '$lib/PageTransition.svelte'
   import type { PagePathDetail } from '$lib/types'
+  import showLoginModal from '../stores/loginModalToggler'
   import { onMount } from 'svelte'
+  import { fade } from 'svelte/transition'
   import '../app.css'
 
   export let currentPath: string
@@ -34,6 +37,12 @@
     prefetchRoutes()
   })
 </script>
+
+{#if $showLoginModal}
+  <div transition:fade={{ duration: 100 }}>
+    <Modal on:close={() => showLoginModal.toggle()} />
+  </div>
+{/if}
 
 <Header />
 
