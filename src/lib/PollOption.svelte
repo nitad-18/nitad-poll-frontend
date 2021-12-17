@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { PollOption } from '$lib/types'
   import { createEventDispatcher } from 'svelte'
-  import { tweened } from 'svelte/motion'
-  import { cubicOut } from 'svelte/easing'
 
   export let pollOption: PollOption
   export let totalVotes: number
