@@ -27,15 +27,4 @@
   ]
 </script>
 
-<svelte:head>
-  <title>NITAD Poll</title>
-</svelte:head>
-
-<header class="mb-4">
-  <h1>Current Polls</h1>
-</header>
-
-<!-- TODO-poll-component 
-  - create <PollCard> with <PollOption> inside
-  - if there's no open polls, show <NoPollMessage>
--->
+<h1>Hello World!</h1>
