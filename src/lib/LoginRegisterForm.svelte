@@ -1,4 +1,6 @@
 <script lang="ts">
+  import showLoginModal from '../stores/loginModalToggler'
+  import user from '../stores/userStore'
   import type { LoginRegisterMode } from './types'
 
   let currentMode: LoginRegisterMode = 'login'
@@ -9,12 +11,50 @@
 
   $: buttonText = currentMode === 'login' ? 'login' : 'register'
 
-  const handleSubmit = () => {
-    if (currentMode === 'login') {
-      // login
-    } else {
-      // register
+  const login = async () => {
+    const response = await fetch('http://localhost:4000/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    })
+    const data = await response.json()
+    if (response.ok) {
+      user.set(data)
+      showLoginModal.toggle()
+      return
     }
+    alert('failed to login')
+  }
+
+  const handleSubmit = async () => {
+    if (currentMode === 'login') {
+      await login()
+      return
+    }
+    // register
+    const response = await fetch('http://localhost:4000/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        displayName: Math.random().toString(),
+      }),
+    })
+    if (response.ok) {
+      // success
+      currentMode = 'login'
+      alert('registered successfully')
+      return
+    }
+    alert('failed to register')
   }
 </script>
 
@@ -29,7 +69,7 @@
     {/each}
   </div>
 
-  <form on:submit|preventDefault class="space-y-4">
+  <form on:submit|preventDefault={handleSubmit} class="space-y-4">
     <label>
       <span>username</span>
       <input

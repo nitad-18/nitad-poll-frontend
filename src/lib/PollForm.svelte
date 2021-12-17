@@ -97,6 +97,7 @@
 >
   <h1>Question:</h1>
   <input
+    type="text"
     bind:this={questionInput}
     bind:value={question}
     placeholder="Your question"

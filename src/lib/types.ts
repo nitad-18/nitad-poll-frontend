@@ -17,3 +17,9 @@ export type PagePathDetail = {
 }
 
 export type LoginRegisterMode = 'login' | 'register'
+
+export type User = {
+  id: number
+  username: string
+  displayName: string
+}

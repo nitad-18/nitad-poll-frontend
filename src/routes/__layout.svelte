@@ -22,7 +22,7 @@
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
   import '../app.css'
-  import LoginForm from '$lib/LoginRegisterForm.svelte'
+  import LoginRegisterForm from '$lib/LoginRegisterForm.svelte'
 
   export let currentPath: string
 
@@ -40,9 +40,9 @@
 </script>
 
 {#if $showLoginModal}
-  <div transition:fade={{ duration: 100 }}>
-    <Modal on:close={() => showLoginModal.toggle()}>
-      <LoginForm />
+  <div transition:fade={{ duration: 500 }}>
+    <Modal on:close={showLoginModal.toggle}>
+      <LoginRegisterForm />
     </Modal>
   </div>
 {/if}
