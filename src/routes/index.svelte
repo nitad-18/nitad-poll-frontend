@@ -28,7 +28,7 @@
 </svelte:head>
 
 <header class="mb-4">
-  <h1>Current Polls ({$pollStore.filter((p) => p.open).length})</h1>
+  <h1>Current Polls ({openPolls.length})</h1>
 
   <!-- TODO-sort 
     - hide the below span and the generated buttons if there's no open polls
