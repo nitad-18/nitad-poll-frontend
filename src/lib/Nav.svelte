@@ -10,7 +10,7 @@
     <a
       href={path.path}
       class:hover:text-gray-300={path.path !== currentPath}
-      class:text-blue-300={path.path === currentPath}>{path.name}</a
+      class:!text-blue-300={path.path === currentPath}>{path.name}</a
     >
   {/each}
 </nav>
