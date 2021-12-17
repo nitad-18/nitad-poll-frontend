@@ -33,3 +33,8 @@ a {
   @apply underline text-blue-300 decoration-blue-300 hover:text-blue-400
   hover:decoration-blue-400;
 }
+
+input[type='text'],
+input[type='password'] {
+  @apply bg-slate-500 rounded h-10 px-4 w-full;
+}

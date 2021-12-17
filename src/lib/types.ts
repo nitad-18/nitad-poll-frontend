@@ -15,3 +15,5 @@ export type PagePathDetail = {
   path: string
   name: string
 }
+
+export type LoginRegisterMode = 'login' | 'register'

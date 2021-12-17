@@ -129,9 +129,3 @@
     >Submit</button
   >
 </form>
-
-<style>
-  input {
-    @apply bg-slate-500 rounded h-10 px-4 w-full;
-  }
-</style>
