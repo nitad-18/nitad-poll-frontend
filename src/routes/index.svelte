@@ -1,23 +1,7 @@
 <script lang="ts">
   import NoPollMessage from '$lib/NoPollMessage.svelte'
   import PollCard from '$lib/PollCard.svelte'
-  import type { SortMode } from '$lib/types'
   import pollStore from '../stores/PollStore'
-
-  let currentSortMode: SortMode = 'latest'
-
-  const sortModes: SortMode[] = ['latest', 'popularity']
-  const pollHandlers = {
-    delete: (e: CustomEvent<{ pollId: number }>) => {
-      // TODO-events handle with pollStore
-    },
-    close: (e: CustomEvent<{ pollId: number }>) => {
-      // TODO-events handle with pollStore
-    },
-    vote: (e: CustomEvent<{ pollId: number; option: string }>) => {
-      // TODO-events handle with pollStore
-    },
-  }
 
   // TODO-sort sort the polls whenever the current sort mode changes
   $: openPolls = $pollStore.filter((p) => p.open)
@@ -43,7 +27,6 @@
 
 {#if openPolls.length}
   {#each openPolls as poll (poll.id)}
-    <!-- TODO-events handle poll events emitted from <PollCard> -->
     <PollCard {poll} />
   {/each}
 {:else}

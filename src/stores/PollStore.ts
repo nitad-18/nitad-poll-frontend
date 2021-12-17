@@ -5,7 +5,7 @@ import type { SortMode, PollDetail } from '$lib/types'
  * a custom store is just a function that returns at least a `subscribe` function
  */
 const createPollStore = () => {
-  const { subscribe, update } = writable<PollDetail[]>([
+  const { subscribe } = writable<PollDetail[]>([
     {
       id: 1,
       question: 'Python or JavaScript?',
@@ -38,49 +38,9 @@ const createPollStore = () => {
     // TODO-sort
   }
 
-  /**
-   * add a new poll to the store
-   * @param poll The new poll to be added to the store
-   */
-  const add = (poll: PollDetail) => {
-    // TODO-create-poll
-  }
-
-  /**
-   * remove a poll given its id from the store
-   * @param pollId The id of the poll to be removed
-   */
-  const remove = (pollId: number) => {
-    // TODO-events
-  }
-
-  /**
-   * close a poll given its id in the store
-   * @param pollId The id of the poll to be closed
-   */
-  const close = (pollId: number) => {
-    // TODO-events
-  }
-
-  /**
-   * update the number of votes on the option of a poll
-   * @param pollId The id of the poll that the user voted on
-   * @param option The option that the user voted on
-   * @param sortMode The current sort mode that is being used
-   */
-  const vote = (pollId: number, option: string, sortMode: SortMode) => {
-    // TODO-events
-    // update the number of votes on the option of a poll
-    // if the sort mode is 'popularity' then sort the polls in case there is a change in order
-  }
-
   return {
     subscribe,
     sort,
-    add,
-    remove,
-    close,
-    vote,
   }
 }
 

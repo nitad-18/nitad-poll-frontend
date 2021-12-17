@@ -11,15 +11,8 @@
   $: bgColor = optionColors[index % optionColors.length]
 
   $: bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
-
-  const emit = {
-    vote: () => {
-      // TODO-events emit vote event with neccessary data
-    },
-  }
 </script>
 
-<!-- TODO-evets emit event using `emit.vote` -->
 <li
   class="bg-slate-500 rounded relative h-14 overflow-hidden
         cursor-pointer"
