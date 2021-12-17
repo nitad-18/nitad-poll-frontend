@@ -78,14 +78,10 @@
   }
 
   /**
-   * manage autofocus on inputs
+   * autofocus on the new option input
    */
   const autofocus = (e: CustomEvent, index: number) => {
-    if (!question.trim()) {
-      questionInput.focus()
-      return
-    }
-    if (index === 0) {
+    if (index === 0 && options.length > 1) {
       ;(e.target as HTMLInputElement).focus()
     }
   }
@@ -115,6 +111,11 @@
       on:introstart={(e) => autofocus(e, index)}
       bind:value={option[0]}
       placeholder="Option {options.length - index}"
+      on:keypress={(e) => {
+        if (e.key === 'Enter') {
+          addOption()
+        }
+      }}
     />
   {/each}
 
@@ -124,7 +125,9 @@
     on:click={addOption}>Add Option</button
   >
   <br />
-  <button type="submit" class="btn-primary">Submit</button>
+  <button on:click={handleSubmit} type="button" class="btn-primary"
+    >Submit</button
+  >
 </form>
 
 <style>
