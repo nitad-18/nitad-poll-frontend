@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PollStore from '../stores/PollStore'
+  import pollStore from '../stores/PollStore'
   import type { PollDetail } from '$lib/types'
   import { goto } from '$app/navigation'
   import { onMount } from 'svelte'
@@ -51,7 +51,7 @@
       createdAt: new Date(),
     }
     // save poll to store
-    PollStore.add(poll)
+    pollStore.add(poll)
     // navigate to the current polls page
     goto('/')
   }

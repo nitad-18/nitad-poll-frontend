@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 import type { SortMode, PollDetail } from '$lib/types'
 
-// const PollStore = writable<PollDetail[]>([
+// const pollStore = writable<PollDetail[]>([
 //   {
 //     id: '1',
 //     question: 'Python or JavaScript?',
@@ -26,7 +26,7 @@ import type { SortMode, PollDetail } from '$lib/types'
 //   },
 // ])
 
-// export default PollStore
+// export default pollStore
 
 /**
  * a custom store is just a function that returns at least a subscribe function
@@ -81,5 +81,5 @@ const createPollStore = () => {
   }
 }
 
-const PollStore = createPollStore()
-export default PollStore
+const pollStore = createPollStore()
+export default pollStore
