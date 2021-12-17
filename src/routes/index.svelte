@@ -43,7 +43,7 @@
 
 {#if openPolls.length}
   {#each openPolls as poll (poll.id)}
-    <!-- TODO-events poll events emitted from <PollCard> -->
+    <!-- TODO-events handle poll events emitted from <PollCard> -->
     <PollCard {poll} />
   {/each}
 {:else}

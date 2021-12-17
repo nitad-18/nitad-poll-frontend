@@ -1,30 +1,20 @@
 <script lang="ts">
   import type { PollDetail } from '$lib/types'
-  import { createEventDispatcher } from 'svelte'
   import PollOption from './PollOption.svelte'
 
   export let poll: PollDetail
 
-  const dispatch = createEventDispatcher<{
-    /**
-     * Emitted when the poll owner clicks the "Delete" button of a poll specified by `pollId`.
-     */
-    delete: { pollId: number }
-    /**
-     * Emitted when the poll owner clicks the "Close" button of a poll specified by `pollId`.
-     */
-    close: { pollId: number }
-    /**
-     * Emitted when a user votes on an option specified by `option` of a poll specified by `pollId`.
-     */
-    vote: { pollId: number; option: string }
-  }>()
-
+  // emit enough detail so that the poll store can do its work
   const emit = {
-    delete: () => dispatch('delete', { pollId: poll.id }),
-    close: () => dispatch('close', { pollId: poll.id }),
-    vote: (event: CustomEvent<{ option: string }>) =>
-      dispatch('vote', { pollId: poll.id, option: event.detail.option }),
+    delete: () => {
+      // TODO-events dispatch delete event
+    },
+    close: () => {
+      // TODO-events dispatch close event
+    },
+    vote: (event: CustomEvent<{ option: string }>) => {
+      // TODO-events dispatch vote event
+    },
   }
 </script>
 
@@ -36,19 +26,16 @@
   <main>
     <ul class="space-y-4">
       {#each poll.options as pollOption, index}
-        <PollOption
-          on:vote={emit.vote}
-          {index}
-          {pollOption}
-          totalVotes={poll.votes}
-        />
+        <!-- TODO-events pass the event from <PollOption> to the parent -->
+        <PollOption {index} {pollOption} totalVotes={poll.votes} />
       {/each}
     </ul>
   </main>
   {#if poll.open}
     <div class="flex justify-center space-x-4">
-      <button on:click={emit.delete} class="btn-primary">delete</button>
-      <button on:click={emit.close} class="btn-secondary">Close</button>
+      <!-- TODO-events emit appropriate events when clicking these -->
+      <button class="btn-primary">delete</button>
+      <button class="btn-secondary">Close</button>
     </div>
   {/if}
 </article>

@@ -1,26 +1,26 @@
 <script lang="ts">
   import type { PollOption } from '$lib/types'
-  import { createEventDispatcher } from 'svelte'
 
   export let pollOption: PollOption
   export let totalVotes: number
   export let index: number
 
-  const dispatch = createEventDispatcher<{ vote: { option: string } }>()
   const optionColors = ['bg-blue-300', 'bg-green-300', 'bg-red-300']
 
   $: [option, votes] = pollOption
   $: bgColor = optionColors[index % optionColors.length]
 
-  $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1)
+  $: bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
 
   const emit = {
-    vote: () => dispatch('vote', { option }),
+    vote: () => {
+      // TODO-events emit vote event with neccessary data
+    },
   }
 </script>
 
+<!-- TODO-evets emit event using `emit.vote` -->
 <li
-  on:click={emit.vote}
   class="bg-slate-500 rounded relative h-14 overflow-hidden
         cursor-pointer"
 >
