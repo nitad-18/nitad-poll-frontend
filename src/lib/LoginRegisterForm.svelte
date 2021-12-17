@@ -17,6 +17,7 @@
     if (userData) {
       user.set(userData)
       showLoginModal.toggle()
+      const polls = await axiosInstance.getPolls()
       return
     }
     alert('failed to login')

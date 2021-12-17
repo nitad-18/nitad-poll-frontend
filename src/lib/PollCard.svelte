@@ -17,14 +17,18 @@
     /**
      * Emitted when a user votes on an option specified by `option` of a poll specified by `pollId`.
      */
-    vote: { pollId: number; option: string }
+    vote: { pollId: number; optionId: number; option: string }
   }>()
 
   const emit = {
     delete: () => dispatch('delete', { pollId: poll.id }),
     close: () => dispatch('close', { pollId: poll.id }),
-    vote: (event: CustomEvent<{ option: string }>) =>
-      dispatch('vote', { pollId: poll.id, option: event.detail.option }),
+    vote: (event: CustomEvent<{ optionId: number; option: string }>) =>
+      dispatch('vote', {
+        pollId: poll.id,
+        optionId: event.detail.optionId,
+        option: event.detail.option,
+      }),
   }
 </script>
 
@@ -45,7 +49,7 @@
       {/each}
     </ul>
   </main>
-  {#if poll.open}
+  {#if !poll.isClose}
     <div class="flex justify-center space-x-4">
       <button on:click={emit.delete} class="btn-primary">delete</button>
       <button on:click={emit.close} class="btn-secondary">Close</button>

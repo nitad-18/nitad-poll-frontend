@@ -5,6 +5,7 @@
   import { onMount } from 'svelte'
   import { fly } from 'svelte/transition'
   import { flip } from 'svelte/animate'
+  import axiosInstance from '../axios'
 
   let question = ''
   let options: [string][] = [['']]
@@ -46,24 +47,17 @@
   /**
    * create a new deault poll
    */
-  const createPoll = (): PollDetail => {
-    return {
-      question,
-      options: options.map(([option]) => [option, 0]) as [string, number][],
-      id: Math.random(),
-      open: true,
-      votes: 0,
-      createdAt: new Date(),
-    }
+  const createPoll = async (): Promise<PollDetail> => {
+    return await axiosInstance.createPoll(question, options)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // validate the form
     if (!validateForm()) return
     // remove duplicate options
     removeDuplicate()
     // create a new poll from the validated form data
-    const poll = createPoll()
+    const poll = await createPoll()
     // save the poll to poll store
     pollStore.add(poll)
     // navigate to the current polls page

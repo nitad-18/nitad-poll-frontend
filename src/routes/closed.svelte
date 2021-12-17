@@ -2,7 +2,7 @@
   import PollCard from '$lib/PollCard.svelte'
   import pollStore from '../stores/PollStore'
 
-  const closedPolls = $pollStore.filter((poll) => !poll.open)
+  const closedPolls = $pollStore.filter((poll) => poll.isClose)
 </script>
 
 <svelte:head>
