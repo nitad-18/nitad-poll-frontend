@@ -75,15 +75,6 @@
     options = [[''], ...options]
   }
 
-  /**
-   * autofocus on the new option input
-   */
-  const autofocus = (e: CustomEvent, index: number) => {
-    if (index === 0 && options.length > 1) {
-      ;(e.target as HTMLInputElement).focus()
-    }
-  }
-
   onMount(() => {
     questionInput.focus()
   })
