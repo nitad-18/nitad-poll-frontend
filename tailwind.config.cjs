@@ -4,5 +4,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  important: true, // see https://stackoverflow.com/a/62610085
 }

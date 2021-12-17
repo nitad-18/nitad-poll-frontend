@@ -83,7 +83,7 @@
 
 <form
   on:submit|preventDefault={handleSubmit}
-  class="card p-5 text-center w-[32rem] mx-auto"
+  class="card !p-5 text-center w-[32rem] mx-auto"
 >
   <h1>Question:</h1>
   <input
@@ -111,7 +111,7 @@
     on:click={addOption}>Add Option</button
   >
   <br />
-  <button type="submit" class="btn-primary" value="Add Poll">Submit</button>
+  <button type="submit" class="btn-primary">Submit</button>
 </form>
 
 <style>
