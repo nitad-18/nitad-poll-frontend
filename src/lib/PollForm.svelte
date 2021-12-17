@@ -3,8 +3,6 @@
   import type { PollDetail } from '$lib/types'
   import { goto } from '$app/navigation'
   import { onMount } from 'svelte'
-  import { fly } from 'svelte/transition'
-  import { flip } from 'svelte/animate'
 
   let question = ''
   let options: [string][] = [['']]
@@ -106,9 +104,6 @@
   {#each options as option, index (option)}
     <input
       type="text"
-      animate:flip={{ duration: 300 }}
-      in:fly={{ duration: 500, y: 10 }}
-      on:introstart={(e) => autofocus(e, index)}
       bind:value={option[0]}
       placeholder="Option {options.length - index}"
       on:keypress={(e) => {

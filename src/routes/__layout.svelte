@@ -15,7 +15,6 @@
   import { prefetchRoutes } from '$app/navigation'
   import Header from '$lib/Header.svelte'
   import Nav from '$lib/Nav.svelte'
-  import PageTransition from '$lib/PageTransition.svelte'
   import type { PagePathDetail } from '$lib/types'
   import { onMount } from 'svelte'
   import '../app.css'
@@ -39,6 +38,6 @@
 
 <Nav {currentPath} {paths} />
 
-<PageTransition {currentPath}>
+<main class="mx-14 md:mx-32 lg:mx-80">
   <slot />
-</PageTransition>
+</main>

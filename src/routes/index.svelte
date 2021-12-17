@@ -3,8 +3,6 @@
   import PollCard from '$lib/PollCard.svelte'
   import type { SortMode } from '$lib/types'
   import pollStore from '../stores/PollStore'
-  import { flip } from 'svelte/animate'
-  import { fade } from 'svelte/transition'
 
   let currentSortMode: SortMode = 'latest'
 
@@ -42,15 +40,13 @@
 
 {#if openPolls.length}
   {#each openPolls as poll (poll.id)}
-    <div animate:flip={{ duration: 400 }}>
-      <PollCard
-        on:vote={pollHandlers.vote}
-        on:close={pollHandlers.close}
-        on:delete={pollHandlers.delete}
-        {poll}
-      />
-    </div>
+    <PollCard
+      on:vote={pollHandlers.vote}
+      on:close={pollHandlers.close}
+      on:delete={pollHandlers.delete}
+      {poll}
+    />
   {/each}
 {:else}
-  <div in:fade={{ delay: 400 }}><NoPollMessage /></div>
+  <div><NoPollMessage /></div>
 {/if}
