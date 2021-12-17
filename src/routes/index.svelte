@@ -28,7 +28,7 @@
 
 <header class="mb-4">
   <h1>Current Polls ({$pollStore.filter((p) => p.open).length})</h1>
-  {#if openPolls}
+  {#if openPolls.length}
     <span>Sort by:</span>
     {#each sortModes as mode}
       <button
@@ -40,7 +40,7 @@
   {/if}
 </header>
 
-{#if openPolls}
+{#if openPolls.length}
   {#each openPolls as poll (poll.id)}
     <div animate:flip={{ duration: 400 }}>
       <PollCard
