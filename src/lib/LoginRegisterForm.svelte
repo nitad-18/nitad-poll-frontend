@@ -1,31 +1,21 @@
 <script lang="ts">
+  import axiosInstance from '../axios'
   import showLoginModal from '../stores/loginModalToggler'
   import user from '../stores/userStore'
   import type { LoginRegisterMode } from './types'
-  import axios from "axios"
 
   let currentMode: LoginRegisterMode = 'login'
   let username = ''
   let password = ''
-
-  const instance = axios.create({
-    baseURL: 'http://localhost:4000/',
-    withCredentials: true,
-  })
 
   const modes: LoginRegisterMode[] = ['login', 'register']
 
   $: buttonText = currentMode === 'login' ? 'login' : 'register'
 
   const login = async () => {
-    const response = await instance.post(
-      'http://localhost:4000/auth/login',
-      { username, password },
-      { headers: { 'Content-Type': 'application/json' } }
-    )
-    const data = await response.data
-    if (response.status === 200) {
-      user.set(data)
+    const userData = await axiosInstance.login(username, password)
+    if (userData) {
+      user.set(userData)
       showLoginModal.toggle()
       return
     }

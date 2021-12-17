@@ -2,7 +2,7 @@
   import user from '../stores/userStore'
   import showLoginModal from '../stores/loginModalToggler'
   import type { PagePathDetail } from './types'
-  import axios from 'axios'
+  import axiosInstance from '../axios'
 
   // path is recieved from the script above
   export let currentPath: string
@@ -10,22 +10,10 @@
 
   $: buttonText = $user !== null ? 'Logout' : 'Login'
 
-
-  // create axios instance
-  const instance = axios.create({
-    baseURL: 'http://localhost:4000/',
-    withCredentials: true,
-  })
-
   const handleButtonClick = async () => {
-    if ($user) {
-      const response = await instance.delete('http://localhost:4000/auth/logout', {
-        withCredentials: true,
-      })
-      if (response.status === 204) {
-        user.set(null)
-        showLoginModal.toggle()
-      }
+    if ($user && (await axiosInstance.logout())) {
+      user.set(null)
+      showLoginModal.toggle()
     }
   }
 </script>
