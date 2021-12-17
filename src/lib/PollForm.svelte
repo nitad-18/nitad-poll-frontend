@@ -2,10 +2,12 @@
   import pollStore from '../stores/PollStore'
   import type { PollDetail } from '$lib/types'
   import { goto } from '$app/navigation'
-  import { onMount } from 'svelte'
 
+  type optionText = string // only here for descriptive purposes
+
+  // the text binded to value of the question input
   let question = ''
-  let options: [string][] = [['']]
+  let options: [optionText][] = [['']] // just use this data structure
 
   // the qustion <input />
   let questionInput: HTMLInputElement
@@ -14,31 +16,17 @@
    * validate the form before submitting
    */
   const validateForm = () => {
+    // TODO-create-poll
     // check if question is empty
-    if (question.trim() === '') {
-      return false
-    }
     // check if at least one option is entered
-    for (const [option] of options) {
-      if (option.trim() !== '') {
-        return true
-      }
-    }
     return false
   }
 
   /**
-   * remove duplicate options
+   * remove duplicate options (make changes to the variable `options`)
    */
   const removeDuplicate = () => {
-    const seenOptions = new Set<string>()
-    options = options.filter(([option]) => {
-      if (seenOptions.has(option)) {
-        return false
-      }
-      seenOptions.add(option)
-      return true
-    })
+    // TODO-create-poll
   }
 
   /**
@@ -65,55 +53,45 @@
     // save the poll to poll store
     pollStore.add(poll)
     // navigate to the current polls page
-    goto('/')
+    goto('/') // sveltekit specific
   }
 
   /**
-   * add a new option to the form
+   * add a new empty option to the form (to the varbiable `options`)
    */
   const addOption = () => {
-    options = [[''], ...options]
+    // TODO-create-poll
   }
 
-  onMount(() => {
-    questionInput.focus()
-  })
+  // TODO-create-poll focus the question input on mount
 </script>
 
-<form
-  on:submit|preventDefault={handleSubmit}
-  class="card !p-5 text-center w-[32rem] mx-auto"
->
+<form class="card !p-5 text-center w-[32rem] mx-auto">
   <h1>Question:</h1>
-  <input
-    bind:this={questionInput}
-    bind:value={question}
-    placeholder="Your question"
-    required
-  />
-  <h1>Options:</h1>
-  {#each options as option, index (option)}
-    <input
-      type="text"
-      bind:value={option[0]}
-      placeholder="Option {options.length - index}"
-      on:keypress={(e) => {
-        if (e.key === 'Enter') {
-          addOption()
-        }
-      }}
-    />
-  {/each}
+  <input placeholder="Your question" required />
 
-  <button
-    type="button"
-    class="text-gray-200 mb-3 underline text-sm"
-    on:click={addOption}>Add Option</button
+  <h1>Options:</h1>
+  <!-- TODO-create-poll
+  - generate all option <input> based on the variable `options`
+  - each <input> value must be binded to the corresponding values in `options`
+  - each <input> displays a placholder "Option {a number}", for example, for the <input> that is second in order should display "Option 2" as its placeholder. hint hint index?
+  -->
+  <input
+    type="text"
+    placeholder="Option 'hardcoded 1'"
+    on:keypress={(e) => {
+      // TODO-create-poll press 'Enter' on any option <input> to add a new option <input> *at the top* (at the 0th index of `options`)
+    }}
+  />
+
+  <!-- TODO-create-poll click this button to add a new option -->
+  <button type="button" class="text-gray-200 mb-3 underline text-sm"
+    >Add Option</button
   >
   <br />
-  <button on:click={handleSubmit} type="button" class="btn-primary"
-    >Submit</button
-  >
+
+  <!-- TODO-create-poll click this button to submit the poll -->
+  <button type="button" class="btn-primary">Submit</button>
 </form>
 
 <style>

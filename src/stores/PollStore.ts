@@ -26,14 +26,14 @@ const createPollStore = () => {
    * @param poll The new poll to be added to the store
    */
   const add = (poll: PollDetail) => {
-    update((currentPolls) => [poll, ...currentPolls])
+    // TODO-create-poll
   }
 
   /**
    * remove a poll given its id from the store
    * @param pollId The id of the poll to be removed
    */
-  const remove = (pollId: string) => {
+  const remove = (pollId: number) => {
     update((currentPolls) => currentPolls.filter((poll) => poll.id !== pollId))
   }
 
@@ -41,7 +41,7 @@ const createPollStore = () => {
    * close a poll given its id in the store
    * @param pollId The id of the poll to be closed
    */
-  const close = (pollId: string) => {
+  const close = (pollId: number) => {
     update((currentPolls) => {
       currentPolls.find((poll) => poll.id === pollId).open = false
       return currentPolls
@@ -54,7 +54,7 @@ const createPollStore = () => {
    * @param option The option that the user voted on
    * @param sortMode The current sort mode that is being used
    */
-  const vote = (pollId: string, option: string, sortMode: SortMode) => {
+  const vote = (pollId: number, option: string, sortMode: SortMode) => {
     update((currentPolls) => {
       const poll = currentPolls.find((poll) => poll.id === pollId)
       poll.options.find((opt) => opt[0] === option)[1]++
