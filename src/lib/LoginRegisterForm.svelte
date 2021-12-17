@@ -2,28 +2,29 @@
   import showLoginModal from '../stores/loginModalToggler'
   import user from '../stores/userStore'
   import type { LoginRegisterMode } from './types'
+  import axios from "axios"
 
   let currentMode: LoginRegisterMode = 'login'
   let username = ''
   let password = ''
+
+  const instance = axios.create({
+    baseURL: 'http://localhost:4000/',
+    withCredentials: true,
+  })
 
   const modes: LoginRegisterMode[] = ['login', 'register']
 
   $: buttonText = currentMode === 'login' ? 'login' : 'register'
 
   const login = async () => {
-    const response = await fetch('http://localhost:4000/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    })
-    const data = await response.json()
-    if (response.ok) {
+    const response = await instance.post(
+      'http://localhost:4000/auth/login',
+      { username, password },
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+    const data = await response.data
+    if (response.status === 200) {
       user.set(data)
       showLoginModal.toggle()
       return

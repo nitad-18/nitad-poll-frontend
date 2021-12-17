@@ -19,13 +19,9 @@
 
   const handleButtonClick = async () => {
     if ($user) {
-      // const response = await axios.post('http://localhost:4000/auth/logout', {
-      //   withCredentials: true,
-      // })
-      const response = await instance.get('http://localhost:4000/polls')
-      // const response = await fetch('http://localhost:4000/auth/logout', {
-      //   method: 'DELETE',
-      // })
+      const response = await instance.delete('http://localhost:4000/auth/logout', {
+        withCredentials: true,
+      })
       if (response.status === 204) {
         user.set(null)
         showLoginModal.toggle()
