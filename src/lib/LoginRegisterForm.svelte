@@ -1,29 +1,64 @@
 <script lang="ts">
-  import LoginForm from './LoginForm.svelte'
   import type { LoginRegisterMode } from './types'
 
   let currentMode: LoginRegisterMode = 'login'
+  let username = ''
+  let password = ''
 
-  const handlers = {
-    login: (e: CustomEvent<{ username: string; password: string }>) => {
-      console.log(e.detail)
-    },
+  const modes: LoginRegisterMode[] = ['login', 'register']
+
+  $: buttonText = currentMode === 'login' ? 'login' : 'register'
+
+  const handleSubmit = () => {
+    if (currentMode === 'login') {
+      // login
+    } else {
+      // register
+    }
   }
 </script>
 
 <div class="space-y-8">
   <div>
-    <button class="text-xl" class:text-blue-300={currentMode === 'login'}
-      >login</button
-    >
-    <button class="text-xl" class:text-blue-300={currentMode === 'register'}
-      >register</button
-    >
+    {#each modes as mode}
+      <button
+        on:click={() => (currentMode = mode)}
+        class="text-xl"
+        class:text-blue-300={currentMode === mode}>{mode}</button
+      >
+    {/each}
   </div>
 
-  {#if currentMode === 'login'}
-    <LoginForm on:submit={handlers.login} />
-  {:else}
-    <!-- <RegisterForm> -->
-  {/if}
+  <form on:submit|preventDefault class="space-y-4">
+    <label>
+      <span>username</span>
+      <input
+        bind:value={username}
+        placeholder="username"
+        type="text"
+        autocomplete="false"
+        required
+      />
+    </label>
+    <label>
+      <span>password</span>
+      <input
+        bind:value={password}
+        placeholder="password"
+        type="password"
+        autocomplete="false"
+        required
+      />
+    </label>
+    <button type="submit" class="btn-primary">{buttonText}</button>
+  </form>
 </div>
+
+<style>
+  input {
+    @apply w-[36ch];
+  }
+  label {
+    @apply block font-semibold space-x-4;
+  }
+</style>
