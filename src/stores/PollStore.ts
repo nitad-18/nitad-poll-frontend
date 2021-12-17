@@ -35,13 +35,7 @@ const createPollStore = () => {
    * @param by mode to sort by, 'popular' or 'latest'
    */
   const sort = (by: SortMode) => {
-    if (by === 'popularity') {
-      update((polls) => polls.sort((a, b) => b.votes - a.votes))
-      return
-    }
-    update((polls) => {
-      return polls.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-    })
+    // TODO-sort
   }
 
   /**

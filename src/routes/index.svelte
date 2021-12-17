@@ -19,7 +19,7 @@
     },
   }
 
-  $: pollStore.sort(currentSortMode)
+  // TODO-sort sort the polls whenever the current sort mode changes
   $: openPolls = $pollStore.filter((p) => p.open)
 </script>
 
@@ -29,16 +29,16 @@
 
 <header class="mb-4">
   <h1>Current Polls ({$pollStore.filter((p) => p.open).length})</h1>
-  {#if openPolls.length}
-    <span>Sort by:</span>
-    {#each sortModes as mode}
-      <button
-        on:click={() => (currentSortMode = mode)}
-        class="px-2 py-0 transition-colors"
-        class:bg-rose-600={mode === currentSortMode}>{mode}</button
-      >
-    {/each}
-  {/if}
+
+  <!-- TODO-sort 
+    - hide the below span and the generated buttons if there's no open polls
+  -->
+  <span>Sort by:</span>
+  <!-- TODO-sort
+    - generate <button class="px-2 py-0 transition-colors"> having the inner text from the variable sortModes
+    - add a class 'bg-rose-600' if the current sort mode matches this button 
+    - click this button to change the current sort mode
+    -->
 </header>
 
 {#if openPolls.length}
