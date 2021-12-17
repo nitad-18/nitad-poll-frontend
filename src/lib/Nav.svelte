@@ -2,7 +2,6 @@
   // path is recieved from the script above
   export let currentPath: string
   export let paths: { name: string; path: string }[]
-  console.log(currentPath)
 </script>
 
 <nav class="flex justify-center space-x-7 my-8">

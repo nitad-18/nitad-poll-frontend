@@ -6,19 +6,10 @@
   import { fly } from 'svelte/transition'
   import { flip } from 'svelte/animate'
 
-  /**
-   * current form data
-   */
-  let fields: {
-    question: string
-    options: [string, number][]
-  } = {
-    question: '',
-    options: [['', 0]],
-  }
-  /**
-   * the qustion <input />
-   */
+  let question = ''
+  let options: [string][] = [['']]
+
+  // the qustion <input />
   let questionInput: HTMLInputElement
 
   /**
@@ -26,31 +17,54 @@
    */
   const validateForm = () => {
     // check if question is empty
-    if (fields.question.trim() === '') {
+    if (question.trim() === '') {
       return false
     }
-    // check if options are empty
-    for (const [option] of fields.options) {
-      if (option.trim() === '') {
-        return false
+    // check if at least one option is entered
+    for (const [option] of options) {
+      if (option.trim() !== '') {
+        return true
       }
     }
-    return true
+    return false
   }
 
-  const handleSubmit = () => {
-    // validate the form
-    if (!validateForm()) return
+  /**
+   * remove duplicate options
+   */
+  const removeDuplicate = () => {
+    const seenOptions = new Set<string>()
+    options = options.filter(([option]) => {
+      if (seenOptions.has(option)) {
+        return false
+      }
+      seenOptions.add(option)
+      return true
+    })
+  }
 
-    // create the poll from the validated form data
-    const poll: PollDetail = {
-      ...fields,
+  /**
+   * create a new deault poll
+   */
+  const createPoll = (): PollDetail => {
+    return {
+      question,
+      options: options.map(([option]) => [option, 0]) as [string, number][],
       id: Math.random() + '',
       open: true,
       votes: 0,
       createdAt: new Date(),
     }
-    // save poll to store
+  }
+
+  const handleSubmit = () => {
+    // validate the form
+    if (!validateForm()) return
+    // remove duplicate options
+    removeDuplicate()
+    // create a new poll from the validated form data
+    const poll = createPoll()
+    // save the poll to poll store
     pollStore.add(poll)
     // navigate to the current polls page
     goto('/')
@@ -60,14 +74,14 @@
    * add a new option to the form
    */
   const addOption = () => {
-    fields.options = [['', 0], ...fields.options]
+    options = [[''], ...options]
   }
 
   /**
    * manage autofocus on inputs
    */
   const autofocus = (e: CustomEvent, index: number) => {
-    if (!fields.question.trim()) {
+    if (!question.trim()) {
       questionInput.focus()
       return
     }
@@ -88,20 +102,19 @@
   <h1>Question:</h1>
   <input
     bind:this={questionInput}
-    bind:value={fields.question}
+    bind:value={question}
     placeholder="Your question"
     required
   />
   <h1>Options:</h1>
-  {#each fields.options as option, index (option)}
+  {#each options as option, index (option)}
     <input
       type="text"
       animate:flip={{ duration: 300 }}
       in:fly={{ duration: 500, y: 10 }}
       on:introstart={(e) => autofocus(e, index)}
       bind:value={option[0]}
-      placeholder="Option {fields.options.length - index}"
-      required
+      placeholder="Option {options.length - index}"
     />
   {/each}
 
