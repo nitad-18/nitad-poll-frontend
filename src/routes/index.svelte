@@ -1,6 +1,6 @@
 <script lang="ts">
-  import NoPollMessage from '$lib/NoPollMessage/NoPollMessage.svelte'
-  import PollCard from '$lib/PollCard/PollCard.svelte'
+  import NoPollMessage from '$lib/NoPollMessage.svelte'
+  import PollCard from '$lib/PollCard.svelte'
   import type { SortMode } from '$lib/types'
   import pollStore from '../stores/PollStore'
   import { flip } from 'svelte/animate'

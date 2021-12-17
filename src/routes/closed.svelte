@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PollCard from '$lib/PollCard/PollCard.svelte'
+  import PollCard from '$lib/PollCard.svelte'
   import pollStore from '../stores/PollStore'
 
   const closedPolls = $pollStore.filter((poll) => !poll.open)

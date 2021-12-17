@@ -13,8 +13,8 @@
 
 <script lang="ts">
   import { prefetchRoutes } from '$app/navigation'
-  import Nav from '$lib/Nav/Nav.svelte'
-  import PageTransition from '$lib/PageTransition/PageTransition.svelte'
+  import Nav from '$lib/Nav.svelte'
+  import PageTransition from '$lib/PageTransition.svelte'
   import { onMount } from 'svelte'
   import '../app.css'
 
