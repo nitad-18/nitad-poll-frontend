@@ -29,11 +29,15 @@ import type { SortMode, PollDetail } from '$lib/types'
 // export default pollStore
 
 /**
- * a custom store is just a function that returns at least a subscribe function
+ * a custom store is just a function that returns at least a `subscribe` function
  */
 const createPollStore = () => {
   const { subscribe, update } = writable<PollDetail[]>([])
 
+  /**
+   * sort the polls in the store by the given mode
+   * @param by mode to sort by, 'popular' or 'latest'
+   */
   const sort = (by: SortMode) => {
     if (by === 'popularity') {
       update((polls) => polls.sort((a, b) => b.votes - a.votes))
@@ -44,14 +48,26 @@ const createPollStore = () => {
     })
   }
 
+  /**
+   * add a new poll to the store
+   * @param poll The new poll to be added to the store
+   */
   const add = (poll: PollDetail) => {
     update((currentPolls) => [poll, ...currentPolls])
   }
 
+  /**
+   * remove a poll given its id from the store
+   * @param pollId The id of the poll to be removed
+   */
   const remove = (pollId: string) => {
     update((currentPolls) => currentPolls.filter((poll) => poll.id !== pollId))
   }
 
+  /**
+   * close a poll given its id in the store
+   * @param pollId The id of the poll to be closed
+   */
   const close = (pollId: string) => {
     update((currentPolls) => {
       currentPolls.find((poll) => poll.id === pollId).open = false
@@ -59,6 +75,12 @@ const createPollStore = () => {
     })
   }
 
+  /**
+   * update the number of votes on the option of a poll
+   * @param pollId The id of the poll that the user voted on
+   * @param option The option that the user voted on
+   * @param sortMode The current sort mode that is being used
+   */
   const vote = (pollId: string, option: string, sortMode: SortMode) => {
     update((currentPolls) => {
       const poll = currentPolls.find((poll) => poll.id === pollId)
