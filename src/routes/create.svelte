@@ -81,6 +81,10 @@
   })
 </script>
 
+<svelte:head>
+  <title>Create Poll</title>
+</svelte:head>
+
 <form
   on:submit|preventDefault={handleSubmit}
   class="card !p-5 text-center w-[32rem] mx-auto"
