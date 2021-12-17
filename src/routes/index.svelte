@@ -10,11 +10,11 @@
 
   const sortModes: SortMode[] = ['latest', 'popularity']
   const pollHandlers = {
-    delete: (e: CustomEvent<{ pollId: string }>) =>
+    delete: (e: CustomEvent<{ pollId: number }>) =>
       pollStore.remove(e.detail.pollId),
-    close: (e: CustomEvent<{ pollId: string }>) =>
+    close: (e: CustomEvent<{ pollId: number }>) =>
       pollStore.close(e.detail.pollId),
-    vote: (e: CustomEvent<{ pollId: string; option: string }>) =>
+    vote: (e: CustomEvent<{ pollId: number; option: string }>) =>
       pollStore.vote(e.detail.pollId, e.detail.option, currentSortMode),
   }
 
