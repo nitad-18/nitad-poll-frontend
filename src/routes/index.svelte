@@ -19,7 +19,7 @@
   }
 
   $: pollStore.sort(currentSortMode)
-  $: anOpenPoll = $pollStore.find((p) => p.open)
+  $: openPolls = $pollStore.filter((p) => p.open)
 </script>
 
 <svelte:head>
@@ -28,7 +28,7 @@
 
 <header class="mb-4">
   <h1>Current Polls ({$pollStore.filter((p) => p.open).length})</h1>
-  {#if anOpenPoll}
+  {#if openPolls}
     <span>Sort by:</span>
     {#each sortModes as mode}
       <button
@@ -40,17 +40,15 @@
   {/if}
 </header>
 
-{#if anOpenPoll}
-  {#each $pollStore as poll (poll.id)}
+{#if openPolls}
+  {#each openPolls as poll (poll.id)}
     <div animate:flip={{ duration: 400 }}>
-      {#if poll.open}
-        <PollCard
-          on:vote={pollHandlers.vote}
-          on:close={pollHandlers.close}
-          on:delete={pollHandlers.delete}
-          {poll}
-        />
-      {/if}
+      <PollCard
+        on:vote={pollHandlers.vote}
+        on:close={pollHandlers.close}
+        on:delete={pollHandlers.delete}
+        {poll}
+      />
     </div>
   {/each}
 {:else}
