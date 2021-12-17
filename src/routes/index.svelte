@@ -1,6 +1,4 @@
 <script lang="ts">
-  import NoPollMessage from '$lib/NoPollMessage.svelte'
-  import PollCard from '$lib/PollCard.svelte'
   import type { PollDetail } from '$lib/types'
 
   const polls: PollDetail[] = [
@@ -27,9 +25,6 @@
       createdAt: new Date(Date.now() - 86400000), // yesterday
     },
   ]
-
-  // TODO-store use pollStore instead
-  $: openPolls = polls.filter((p) => p.open)
 </script>
 
 <svelte:head>
@@ -37,14 +32,10 @@
 </svelte:head>
 
 <header class="mb-4">
-  <h1>Current Polls ({openPolls.length})</h1>
+  <h1>Current Polls</h1>
 </header>
 
-<!-- TODO-store use pollStore instead -->
-{#if polls.length}
-  {#each polls as poll (poll.id)}
-    <PollCard {poll} />
-  {/each}
-{:else}
-  <div><NoPollMessage /></div>
-{/if}
+<!-- TODO-poll-component 
+  - create <PollCard> with <PollOption> inside
+  - if there's no open polls, show <NoPollMessage>
+-->
