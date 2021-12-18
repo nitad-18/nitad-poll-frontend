@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PollDetail } from '$lib/types'
+  import user from '../stores/userStore'
   import { createEventDispatcher } from 'svelte'
   import PollOption from './PollOption.svelte'
 
@@ -49,7 +50,7 @@
       {/each}
     </ul>
   </main>
-  {#if !poll.isClose}
+  {#if !poll.isClose && poll.author.id === $user.id}
     <div class="flex justify-center space-x-4">
       <button on:click={emit.delete} class="btn-primary">delete</button>
       <button on:click={emit.close} class="btn-secondary">Close</button>
