@@ -4,11 +4,6 @@ export type PollOption = [
   number /* votes on this option*/
 ]
 
-export type PollOptionDto = [
-  string /* option */,
-  number /* votes on this option*/
-]
-
 export type PollDetailWithoutVote = {
   id: number
   question: string
@@ -20,7 +15,7 @@ export type PollDetailWithoutVote = {
 export type PollDetail = {
   id: number
   question: string
-  options: PollOption[] | PollOptionDto[]
+  options: PollOption[]
   votes: number // total votes on this poll
   isClose: boolean // true means the poll is currently open
   author: User // author of poll
