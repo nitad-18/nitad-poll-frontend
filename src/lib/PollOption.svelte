@@ -7,6 +7,7 @@
   export let pollOption: PollOption
   export let totalVotes: number
   export let index: number
+  export let disabled: boolean = false
 
   const dispatch =
     createEventDispatcher<{ vote: { optionId: number; option: string } }>()
@@ -28,6 +29,8 @@
   on:click={emit.vote}
   class="bg-slate-500 rounded relative h-14 overflow-hidden
         cursor-pointer"
+  class:cursor-not-allowed={disabled}
+  title={disabled ? 'You have already voted' : undefined}
 >
   <!-- <div style="width: {bgWidth}%;" class="absolute h-full {bgColor}" /> -->
   <div style="width: {$bgWidth}%;" class="absolute h-full {bgColor}" />

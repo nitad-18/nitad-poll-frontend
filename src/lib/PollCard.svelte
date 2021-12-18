@@ -31,6 +31,8 @@
         option: event.detail.option,
       }),
   }
+
+  $: voted = poll.users.some(user => user.id === user.id) // show if user has voted
 </script>
 
 <article class="card">
@@ -45,6 +47,7 @@
           on:vote={emit.vote}
           {index}
           {pollOption}
+          disabled={voted}
           totalVotes={poll.votes}
         />
       {/each}

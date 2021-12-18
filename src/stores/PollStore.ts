@@ -1,5 +1,6 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import type { SortMode, PollDetail, PollOption } from '$lib/types'
+import user from './userStore'
 
 /**
  * a custom store is just a function that returns at least a `subscribe` function
@@ -59,8 +60,9 @@ const createPollStore = () => {
   const vote = (pollId: number, option: string, sortMode: SortMode) => {
     update((currentPolls) => {
       const poll = currentPolls.find((poll) => poll.id === pollId)
-      ;(poll.options as PollOption[]).find((opt) => opt[1] === option)[2]++
+      poll.options.find((opt) => opt[1] === option)[2]++
       poll.votes++
+      poll.users.push(get(user))
       return currentPolls
     })
     if (sortMode === 'popularity') {
