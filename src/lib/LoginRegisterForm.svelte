@@ -78,9 +78,9 @@
 
 <style>
   input {
-    @apply w-[36ch];
+    @apply block sm:w-[36ch] sm:inline;
   }
   label {
-    @apply block font-semibold space-x-4;
+    @apply block font-semibold sm:space-x-4;
   }
 </style>

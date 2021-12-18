@@ -11,7 +11,7 @@
   class="absolute w-full h-full flex justify-center items-center
     text-center z-10 backdrop-blur-sm"
 >
-  <div class="relative p-16 bg-slate-800 rounded-lg border border-slate-100">
+  <div class="relative p-4 md:p-8 lg:p-16 bg-slate-800 rounded-lg border border-slate-100">
     {#if enableClose}
       <img
         on:click={() => dispatch('close')}
