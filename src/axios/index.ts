@@ -34,7 +34,7 @@ const checkMe = async (): Promise<User | null> => {
 }
 
 const getPolls = async (): Promise<PollDetail[]> => {
-  const response = await instance.get('polls').catch((res) => ({
+  const response = await instance.get('polls').catch(() => ({
     data: [],
   }))
   let polls = []
@@ -73,7 +73,7 @@ const createPoll = async (
 ): Promise<PollDetail> => {
   const pollRes = await instance
     .post('polls', { question })
-    .catch((res) => ({ data: [] }))
+    .catch(() => ({ data: [] }))
   let allOptions: PollOption[]
   if (pollRes.data) {
     allOptions = []
