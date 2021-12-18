@@ -78,17 +78,19 @@ const createPoll = async (
   if (pollRes.data) {
     allOptions = []
     for (const [option] of options) {
+      if (!option) continue
       const optionRes = await instance.post('options', {
         topic: option,
         pollId: pollRes.data.id,
       })
-      allOptions.push(optionRes.data)
+      const { id, topic, votes } = optionRes.data
+      allOptions.push([id, topic, votes])
     }
   }
   return {
     id: pollRes.data.id,
     author: pollRes.data.author,
-    createdDate: pollRes.data.createdDate,
+    createdDate: new Date(pollRes.data.createdDate),
     isClose: pollRes.data.isClose,
     question: pollRes.data.question,
     options: allOptions,
