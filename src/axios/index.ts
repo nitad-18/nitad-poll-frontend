@@ -1,8 +1,6 @@
 import type { PollDetail, PollOption, User } from '$lib/types'
 import pollStore from '../stores/PollStore'
 import axios from 'axios'
-import user from '../stores/userStore'
-import { get } from 'svelte/store'
 
 const instance = axios.create({
   baseURL: 'http://localhost:4000/',
@@ -99,7 +97,7 @@ const createPoll = async (
     question: pollRes.data.question,
     options: allOptions,
     votes: 0,
-    users: [get(user)],
+    users: [],
   }
 }
 

@@ -4,7 +4,7 @@
   import type { SortMode } from '$lib/types'
   import pollStore from '../stores/PollStore'
   import { flip } from 'svelte/animate'
-  import { fade, fly } from 'svelte/transition'
+  import { fade } from 'svelte/transition'
   import axiosInstance from '../axios'
 
   let currentSortMode: SortMode = 'latest'

@@ -32,7 +32,7 @@
       }),
   }
 
-  $: voted = poll.users.some(user => user.id === user.id) // show if user has voted
+  $: voted = $user /* handle logout */ && poll.users.some(u => u.id === $user.id) // show if user has voted
 </script>
 
 <article class="card">
