@@ -8,8 +8,6 @@
   export let currentPath: string
   export let paths: PagePathDetail[]
 
-  $: buttonText = $user !== null ? 'Logout' : 'Login'
-
   const handleButtonClick = async () => {
     if ($user && (await axiosInstance.logout())) {
       user.set(null)
@@ -27,7 +25,9 @@
       class:!text-blue-300={path.path === currentPath}>{path.name}</a
     >
   {/each}
-  <button on:click={handleButtonClick} class="btn-primary">{buttonText}</button>
+  {#if $user}
+    <button on:click={handleButtonClick} class="btn-primary">logout</button>
+  {/if}
 </nav>
 
 <style>

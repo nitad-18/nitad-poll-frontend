@@ -3,11 +3,9 @@
   // https://kit.svelte.dev/docs#loading
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ page }) {
-    await axiosInstance.getPolls()
     return {
       props: {
         currentPath: page.path,
-        // polls,
       },
     }
   }
@@ -19,18 +17,17 @@
   import Modal from '$lib/Modal.svelte'
   import Nav from '$lib/Nav.svelte'
   import PageTransition from '$lib/PageTransition.svelte'
-  import type { PagePathDetail, PollDetail } from '$lib/types'
-  import showLoginModal from '../stores/loginModalToggler'
+  import type { PagePathDetail } from '$lib/types'
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
   import '../app.css'
   import LoginRegisterForm from '$lib/LoginRegisterForm.svelte'
   import axiosInstance from '../axios'
   import user from '../stores/userStore'
-  import pollStore from '../stores/PollStore'
 
   export let currentPath: string
-  // export let polls: PollDetail[]
+
+  let checkedMe = false
 
   const paths: PagePathDetail[] = [
     { name: 'Current Polls', path: '/' },
@@ -44,17 +41,18 @@
     // pollStore.set(polls)
     prefetchRoutes()
     // check if user is already logged in
-    const userData = await axiosInstance.checkMe().catch((res) => null)
+    const userData = await axiosInstance.checkMe().catch(() => null)
     user.set(userData)
-    if (!userData) {
-      showLoginModal.set(true)
+    checkedMe = true
+    if (userData) {
+      await axiosInstance.getPolls()
     }
   })
 </script>
 
-{#if $showLoginModal}
+{#if checkedMe && !$user}
   <div transition:fade={{ duration: 500 }}>
-    <Modal on:close={showLoginModal.toggle}>
+    <Modal enableClose={false}>
       <LoginRegisterForm />
     </Modal>
   </div>
@@ -64,6 +62,8 @@
 
 <Nav {currentPath} {paths} />
 
-<PageTransition {currentPath}>
-  <slot />
-</PageTransition>
+{#if $user}
+  <PageTransition {currentPath}>
+    <slot />
+  </PageTransition>
+{/if}
