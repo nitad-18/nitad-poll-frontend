@@ -31,7 +31,7 @@
     },
   }
 
-  $: pollStore.sort(currentSortMode)
+  $: $pollStore && pollStore.sort(currentSortMode)
   $: openPolls = $pollStore.filter((p) => !p.isClose)
 </script>
 
