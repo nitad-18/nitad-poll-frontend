@@ -12,21 +12,23 @@
   const sortModes: SortMode[] = ['latest', 'popularity']
   const pollHandlers = {
     delete: async (e: CustomEvent<{ pollId: number }>) => {
-      if (await axiosInstance.deletePoll(e.detail.pollId)) {
-        pollStore.remove(e.detail.pollId)
+      const { pollId } = e.detail
+      if (await axiosInstance.deletePoll(pollId)) {
+        pollStore.remove(pollId)
       }
     },
     close: async (e: CustomEvent<{ pollId: number }>) => {
-      if (await axiosInstance.closePoll(e.detail.pollId)) {
-        pollStore.close(e.detail.pollId)
+      const { pollId } = e.detail
+      if (await axiosInstance.closePoll(pollId)) {
+        pollStore.close(pollId)
       }
     },
-
     vote: async (
       e: CustomEvent<{ pollId: number; optionId: number; option: string }>
     ) => {
-      if (await axiosInstance.vote(e.detail.pollId, e.detail.optionId)) {
-        pollStore.vote(e.detail.pollId, e.detail.option, currentSortMode)
+      const { pollId, option, optionId } = e.detail
+      if (await axiosInstance.vote(pollId, optionId)) {
+        pollStore.vote(pollId, option, currentSortMode)
       }
     },
   }
