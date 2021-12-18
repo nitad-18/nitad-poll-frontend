@@ -17,10 +17,18 @@
     if (userData) {
       user.set(userData)
       showLoginModal.toggle()
-      const polls = await axiosInstance.getPolls()
+      await axiosInstance.getPolls()
       return
     }
     alert('failed to login')
+  }
+
+  const registerAndLogin = async () => {
+    if (await axiosInstance.register(username, password)) {
+      await login()
+      return
+    }
+    alert('failed to register')
   }
 
   const handleSubmit = async () => {
@@ -28,25 +36,7 @@
       await login()
       return
     }
-    // register
-    const response = await fetch('http://localhost:4000/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        displayName: Math.random().toString(),
-      }),
-    })
-    if (response.ok) {
-      // success
-      currentMode = 'login'
-      alert('registered successfully')
-      return
-    }
-    alert('failed to register')
+    await registerAndLogin()
   }
 </script>
 

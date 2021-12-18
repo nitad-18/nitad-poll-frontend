@@ -115,6 +115,18 @@ const deletePoll = async (pollId: number): Promise<boolean> => {
   return response.status === 204
 }
 
+const register = async (
+  username: string,
+  password: string
+): Promise<boolean> => {
+  const response = await instance.post('auth/register', {
+    username,
+    password,
+    displayName: 'displayName', // we don't care about displayName
+  })
+  return response.status === 201
+}
+
 const axiosInstance = {
   logout,
   login,
@@ -124,6 +136,7 @@ const axiosInstance = {
   createPoll,
   closePoll,
   vote,
+  register,
 }
 
 export default axiosInstance
