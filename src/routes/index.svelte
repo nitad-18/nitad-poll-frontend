@@ -5,21 +5,34 @@
   import pollStore from '../stores/PollStore'
   import { flip } from 'svelte/animate'
   import { fade } from 'svelte/transition'
+  import axiosInstance from '../axios'
 
   let currentSortMode: SortMode = 'latest'
 
   const sortModes: SortMode[] = ['latest', 'popularity']
   const pollHandlers = {
-    delete: (e: CustomEvent<{ pollId: number }>) =>
-      pollStore.remove(e.detail.pollId),
-    close: (e: CustomEvent<{ pollId: number }>) =>
-      pollStore.close(e.detail.pollId),
-    vote: (e: CustomEvent<{ pollId: number; option: string }>) =>
-      pollStore.vote(e.detail.pollId, e.detail.option, currentSortMode),
+    delete: async (e: CustomEvent<{ pollId: number }>) => {
+      if (await axiosInstance.deletePoll(e.detail.pollId)) {
+        pollStore.remove(e.detail.pollId)
+      }
+    },
+    close: async (e: CustomEvent<{ pollId: number }>) => {
+      if (await axiosInstance.closePoll(e.detail.pollId)) {
+        pollStore.close(e.detail.pollId)
+      }
+    },
+
+    vote: async (
+      e: CustomEvent<{ pollId: number; optionId: number; option: string }>
+    ) => {
+      if (await axiosInstance.vote(e.detail.pollId, e.detail.optionId)) {
+        pollStore.vote(e.detail.pollId, e.detail.option, currentSortMode)
+      }
+    },
   }
 
   $: pollStore.sort(currentSortMode)
-  $: openPolls = $pollStore.filter((p) => p.open)
+  $: openPolls = $pollStore.filter((p) => !p.isClose)
 </script>
 
 <svelte:head>

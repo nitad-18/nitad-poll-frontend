@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store'
 
 const createLoginModalToggler = () => {
-  const { subscribe, update } = writable(true)
+  const { subscribe, update, set } = writable(false)
 
   const toggle = () => {
     update((prev) => !prev)
   }
 
-  return { subscribe, toggle }
+  return { subscribe, toggle, set }
 }
 
 const showLoginModal = createLoginModalToggler()

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PollOption } from '$lib/types'
+  import type { PollOption, PollOptionDto } from '$lib/types'
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion'
   import { cubicOut } from 'svelte/easing'
@@ -8,10 +8,11 @@
   export let totalVotes: number
   export let index: number
 
-  const dispatch = createEventDispatcher<{ vote: { option: string } }>()
+  const dispatch =
+    createEventDispatcher<{ vote: { optionId: number; option: string } }>()
   const optionColors = ['bg-blue-300', 'bg-green-300', 'bg-red-300']
 
-  $: [option, votes] = pollOption
+  $: [optionId, option, votes] = pollOption
   $: bgColor = optionColors[index % optionColors.length]
 
   // $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1)
@@ -19,7 +20,7 @@
   $: $bgWidth = totalVotes ? (votes / totalVotes) * 100 : 1
 
   const emit = {
-    vote: () => dispatch('vote', { option }),
+    vote: () => dispatch('vote', { optionId, option }),
   }
 </script>
 
