@@ -38,3 +38,7 @@ input[type='text'],
 input[type='password'] {
   @apply bg-slate-500 rounded h-10 px-4 w-full;
 }
+
+.poll-grid {
+  @apply grid lg:grid-cols-2 xl:grid-cols-3 gap-4;
+}

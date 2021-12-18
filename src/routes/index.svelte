@@ -4,7 +4,7 @@
   import type { SortMode } from '$lib/types'
   import pollStore from '../stores/PollStore'
   import { flip } from 'svelte/animate'
-  import { fade } from 'svelte/transition'
+  import { fade, fly } from 'svelte/transition'
   import axiosInstance from '../axios'
 
   let currentSortMode: SortMode = 'latest'
@@ -56,16 +56,18 @@
 </header>
 
 {#if openPolls.length}
-  {#each openPolls as poll (poll.id)}
-    <div animate:flip={{ duration: 400 }}>
-      <PollCard
-        on:vote={pollHandlers.vote}
-        on:close={pollHandlers.close}
-        on:delete={pollHandlers.delete}
-        {poll}
-      />
-    </div>
-  {/each}
+  <div class="poll-grid">
+    {#each openPolls as poll (poll.id)}
+      <div animate:flip={{ duration: 400 }}>
+        <PollCard
+          on:vote={pollHandlers.vote}
+          on:close={pollHandlers.close}
+          on:delete={pollHandlers.delete}
+          {poll}
+        />
+      </div>
+    {/each}
+  </div>
 {:else}
   <div in:fade={{ delay: 400 }}><NoPollMessage /></div>
 {/if}

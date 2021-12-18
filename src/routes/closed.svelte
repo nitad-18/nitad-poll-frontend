@@ -13,6 +13,10 @@
   Closed Polls ({closedPolls.length})
 </h1>
 
-{#each closedPolls as poll (poll.id)}
-  <PollCard {poll} />
-{/each}
+<div class="poll-grid">
+  {#each closedPolls as poll (poll.id)}
+    <div>
+      <PollCard {poll} />
+    </div>
+  {/each}
+</div>
