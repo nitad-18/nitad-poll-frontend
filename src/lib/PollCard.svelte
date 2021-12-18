@@ -50,7 +50,7 @@
       {/each}
     </ul>
   </main>
-  {#if !poll.isClose && poll.author.id === $user.id}
+  {#if !poll.isClose && $user /* in case the user just logged out */ && poll.author.id === $user.id}
     <div class="flex justify-center space-x-4">
       <button on:click={emit.delete} class="btn-primary">delete</button>
       <button on:click={emit.close} class="btn-secondary">Close</button>
