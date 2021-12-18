@@ -13,7 +13,7 @@
     <main
       in:fly={{ delay: transitionDur, y }}
       out:fly={{ duration: transitionDur, y }}
-      class="mx-14 md:mx-32 lg:mx-80"
+      class="mx-auto max-w-[90%] md:max-w-[80%] lg:max-w-4xl xl:max-w-5xl"
     >
       <slot />
     </main>
