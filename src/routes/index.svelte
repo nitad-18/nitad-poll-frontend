@@ -6,23 +6,41 @@
       id: 1,
       question: 'Python or JavaScript?',
       options: [
-        ['Python', 15],
-        ['JavaScript', 9],
+        [1, 'Python', 15],
+        [2, 'JavaScript', 9],
       ],
       votes: 24,
-      open: true,
-      createdAt: new Date(),
+      isClose: false,
+      author: {
+        id: 1,
+        username: 'john',
+        displayName: 'John Doe',
+      },
+      users: [],
+      closedDate: null,
+      createdDate: new Date(),
     },
     {
       id: 2,
       question: 'Comp Sys Arch or HW Syn Lab?',
       options: [
-        ['Comp Sys Arch', 25],
-        ['HW Syn Lab', 9],
+        [1, 'Comp Sys Arch', 25],
+        [2, 'HW Syn Lab', 9],
       ],
       votes: 34,
-      open: true,
-      createdAt: new Date(Date.now() - 86400000), // yesterday
+      isClose: false,
+      author: {
+        id: 2,
+        username: 'jane',
+        displayName: 'Jane Dee',
+      },
+      users: [{
+        id: 1,
+        username: 'john',
+        displayName: 'John Doe',
+      }],
+      closedDate: null,
+      createdDate: new Date(Date.now() - 86400000), // yesterday
     },
   ]
 </script>
