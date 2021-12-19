@@ -11,7 +11,7 @@
   const dispatch = createEventDispatcher<{ vote: { option: string } }>()
   const optionColors = ['bg-blue-300', 'bg-green-300', 'bg-red-300']
 
-  $: [option, votes] = pollOption
+  $: [, option, votes] = pollOption
   $: bgColor = optionColors[index % optionColors.length]
 
   // $: bgWidth = (totalVotes ? (votes / totalVotes) * 100 : 1)

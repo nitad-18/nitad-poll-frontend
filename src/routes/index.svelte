@@ -19,7 +19,7 @@
   }
 
   $: pollStore.sort(currentSortMode)
-  $: openPolls = $pollStore.filter((p) => p.open)
+  $: openPolls = $pollStore.filter((p) => !p.isClose)
 </script>
 
 <svelte:head>
