@@ -4,7 +4,7 @@
   import pollStore from '../stores/PollStore'
 
   // TODO-sort sort the polls whenever the current sort mode changes
-  $: openPolls = $pollStore.filter((p) => p.open)
+  $: openPolls = $pollStore.filter((p) => !p.isClose)
 </script>
 
 <svelte:head>
