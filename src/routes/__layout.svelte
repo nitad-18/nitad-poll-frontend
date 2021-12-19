@@ -18,12 +18,13 @@
   import Nav from '$lib/Nav.svelte'
   import PageTransition from '$lib/PageTransition.svelte'
   import type { PagePathDetail } from '$lib/types'
-  import showLoginModal from '../stores/loginModalToggler'
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
   import '../app.css'
 
   export let currentPath: string
+
+  let showModal = true
 
   const paths: PagePathDetail[] = [
     { name: 'Current Polls', path: '/' },
@@ -38,9 +39,9 @@
   })
 </script>
 
-{#if $showLoginModal}
+{#if showModal}
   <div transition:fade={{ duration: 100 }}>
-    <Modal on:close={() => showLoginModal.toggle()} />
+    <Modal on:close={() => showModal = false} />
   </div>
 {/if}
 
