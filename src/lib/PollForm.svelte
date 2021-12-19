@@ -33,14 +33,8 @@
    * create a new deault poll
    */
   const createPoll = (): PollDetail => {
-    return {
-      question,
-      options: options.map(([option]) => [option, 0]) as [string, number][],
-      id: Math.random(),
-      open: true,
-      votes: 0,
-      createdAt: new Date(),
-    }
+    // TODO-create-poll
+    return /* ??? */
   }
 
   const handleSubmit = () => {
