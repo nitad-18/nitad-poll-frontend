@@ -47,11 +47,18 @@
   const createPoll = (): PollDetail => {
     return {
       question,
-      options: options.map(([option]) => [option, 0]) as [string, number][],
+      options: options.map(([option]) => [Math.random(), option, 0]),
       id: Math.random(),
-      open: true,
+      isClose: false,
       votes: 0,
-      createdAt: new Date(),
+      createdDate: new Date(),
+      author: {
+        displayName: '',
+        id: Math.random(),
+        username: Math.random() + '',
+      },
+      users: [],
+      closedDate: null,
     }
   }
 

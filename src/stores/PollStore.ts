@@ -17,7 +17,9 @@ const createPollStore = () => {
       return
     }
     update((polls) => {
-      return polls.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      return polls.sort(
+        (a, b) => b.createdDate.getTime() - a.createdDate.getTime()
+      )
     })
   }
 
@@ -43,7 +45,7 @@ const createPollStore = () => {
    */
   const close = (pollId: number) => {
     update((currentPolls) => {
-      currentPolls.find((poll) => poll.id === pollId).open = false
+      currentPolls.find((poll) => poll.id === pollId).isClose = true
       return currentPolls
     })
   }
@@ -57,7 +59,7 @@ const createPollStore = () => {
   const vote = (pollId: number, option: string, sortMode: SortMode) => {
     update((currentPolls) => {
       const poll = currentPolls.find((poll) => poll.id === pollId)
-      poll.options.find((opt) => opt[0] === option)[1]++
+      poll.options.find((opt) => opt[1] === option)[2]++
       poll.votes++
       return currentPolls
     })
