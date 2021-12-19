@@ -4,14 +4,6 @@ export type PollOption = [
   number /* votes on this option*/
 ]
 
-export type PollDetailWithoutVote = {
-  id: number
-  question: string
-  options: PollOption[]
-  isClose: boolean // true means the poll is currently open
-  author: User // author of poll
-  createdDate: Date
-}
 export type PollDetail = {
   id: number
   question: string
@@ -20,6 +12,8 @@ export type PollDetail = {
   isClose: boolean // true means the poll is currently open
   author: User // author of poll
   createdDate: Date
+  closedDate?: Date
+  users: User[] // users who voted on this poll
 }
 
 export type SortMode = 'latest' | 'popularity'
