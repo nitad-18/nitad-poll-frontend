@@ -1,6 +1,5 @@
 <script lang="ts">
   import user from '../stores/userStore'
-  import showLoginModal from '../stores/loginModalToggler'
   import type { PagePathDetail } from './types'
   import axiosInstance from '../axios'
 
@@ -11,7 +10,6 @@
   const handleButtonClick = async () => {
     if ($user && (await axiosInstance.logout())) {
       user.set(null)
-      showLoginModal.toggle()
     }
   }
 </script>
