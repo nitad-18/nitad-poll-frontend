@@ -1,6 +1,5 @@
 <script lang="ts">
   import axiosInstance from '../axios'
-  import showLoginModal from '../stores/loginModalToggler'
   import user from '../stores/userStore'
   import type { LoginRegisterMode } from './types'
 
@@ -14,7 +13,6 @@
     const userData = await axiosInstance.login(username, password)
     if (userData) {
       user.set(userData)
-      showLoginModal.toggle()
       await axiosInstance.getPolls()
       return
     }
