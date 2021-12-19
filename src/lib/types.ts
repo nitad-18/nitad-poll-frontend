@@ -9,7 +9,7 @@ export type PollDetail = {
   question: string
   options: PollOption[]
   votes: number // total votes on this poll
-  isClose: boolean // true means the poll is currently open
+  isClose: boolean // true means the poll is closed
   author: User // author of poll
   createdDate: Date
   closedDate?: Date
