@@ -17,7 +17,7 @@
       {/each}
     </ul>
   </main>
-  {#if poll.open}
+  {#if !poll.isClose}
     <div class="flex justify-center space-x-4">
       <button class="btn-primary">delete</button>
       <button class="btn-secondary">Close</button>
