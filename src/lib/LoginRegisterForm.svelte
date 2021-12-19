@@ -10,8 +10,6 @@
 
   const modes: LoginRegisterMode[] = ['login', 'register']
 
-  $: buttonText = currentMode === 'login' ? 'login' : 'register'
-
   const login = async () => {
     const userData = await axiosInstance.login(username, password)
     if (userData) {
@@ -72,7 +70,7 @@
         required
       />
     </label>
-    <button type="submit" class="btn-primary">{buttonText}</button>
+    <button type="submit" class="btn-primary">{currentMode}</button>
   </form>
 </div>
 
