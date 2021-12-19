@@ -16,11 +16,7 @@ const login = async (
   username: string,
   password: string
 ): Promise<User | null> => {
-  const response = await instance.post(
-    'auth/login',
-    { username, password },
-    { headers: { 'Content-Type': 'application/json' } }
-  )
+  const response = await instance.post('auth/login', { username, password })
   const data = await response.data
   return response.status === 200 ? data : null
 }
