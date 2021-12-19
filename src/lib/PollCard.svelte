@@ -31,7 +31,7 @@
       {/each}
     </ul>
   </main>
-  {#if poll.open}
+  {#if !poll.isClose}
     <div class="flex justify-center space-x-4">
       <!-- TODO-events emit appropriate events when clicking these -->
       <button class="btn-primary">delete</button>
