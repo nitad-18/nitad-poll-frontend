@@ -41,8 +41,8 @@
 </header>
 
 <!-- TODO-store use pollStore instead -->
-{#if polls.length}
-  {#each polls as poll (poll.id)}
+{#if openPolls.length}
+  {#each openPolls as poll (poll.id)}
     <PollCard {poll} />
   {/each}
 {:else}
