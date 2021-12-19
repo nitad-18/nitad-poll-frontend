@@ -32,7 +32,7 @@ const createPollStore = () => {
 
   /**
    * sort the polls in the store by the given mode
-   * @param by mode to sort by, 'popular' or 'latest'
+   * @param by mode to sort by, 'popularity' or 'latest'
    */
   const sort = (by: SortMode) => {
     // TODO-sort
