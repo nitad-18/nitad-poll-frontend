@@ -2,43 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-h1,
-h2,
-h3,
-h4 {
-  @apply font-bold;
+/* If you want to add your own default base styles for specific HTML elements, use the @layer directive to add those styles to Tailwind’s base layer: */
+/* https://tailwindcss.com/docs/adding-custom-styles#adding-base-styles */
+@layer base {
+  body {
+    @apply bg-slate-700
+    text-gray-100 text-lg;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold;
+  }
+
+  a {
+    @apply underline text-blue-300 decoration-blue-300 hover:text-blue-400
+    hover:decoration-blue-400;
+  }
+
+  button {
+    @apply px-4 py-2 rounded-lg font-medium capitalize;
+  }
+
+  input[type='text'],
+  input[type='password'] {
+    @apply bg-slate-500 rounded h-10 px-4 w-full;
+  }
 }
 
-body {
-  @apply bg-slate-700
-	text-gray-100 text-lg;
+/* Use the components layer for any more complicated classes you want to add to your project that you’d still like to be able to override with utility classes. */
+/* https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes */
+@layer components {
+  .card {
+    @apply p-4 shadow-md hover:shadow-lg bg-slate-600
+      rounded-lg space-y-4 mb-4;
+  }
+
+  .btn-primary {
+    @apply bg-rose-600 hover:bg-rose-700 border-rose-600;
+  }
+
+  .btn-secondary {
+    @apply border hover:bg-slate-700;
+  }
+
+  .poll-grid {
+    @apply grid lg:grid-cols-2 xl:grid-cols-3 gap-4;
+  }
 }
 
-button {
-  @apply px-4 py-2 rounded-lg font-medium capitalize;
-}
-button.btn-primary {
-  @apply bg-rose-600 hover:bg-rose-700 border-rose-600;
-}
-button.btn-secondary {
-  @apply border hover:bg-slate-700;
-}
-
-.card {
-  @apply p-4 shadow-md hover:shadow-lg bg-slate-600
-    rounded-lg space-y-4 mb-4;
-}
-
-a {
-  @apply underline text-blue-300 decoration-blue-300 hover:text-blue-400
-  hover:decoration-blue-400;
-}
-
-input[type='text'],
-input[type='password'] {
-  @apply bg-slate-500 rounded h-10 px-4 w-full;
-}
-
-.poll-grid {
-  @apply grid lg:grid-cols-2 xl:grid-cols-3 gap-4;
+/* Add any of your own custom utility classes to Tailwind’s utilities layer */
+/* https://tailwindcss.com/docs/adding-custom-styles#adding-custom-utilities */
+@layer utilities {
 }

@@ -87,7 +87,7 @@
 
 <form
   on:submit|preventDefault={handleSubmit}
-  class="card !p-5 text-center w-[32rem] mx-auto"
+  class="card p-5 text-center w-[32rem] mx-auto"
 >
   <h1>Question:</h1>
   <input
