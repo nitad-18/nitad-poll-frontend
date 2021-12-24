@@ -1,5 +1,7 @@
 # NITAD Poll Frontend
 
+[frontend training session recording](https://chula-my.sharepoint.com/:v:/g/personal/6230561021_student_chula_ac_th/ERg0erK4w3lLs83K7IQ7-SABNDAy0uHuawBm98MgO96WOA?e=EMBTdc)
+
 ## Recommended Extensions
 
 Install these extensions first!
